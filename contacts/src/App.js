@@ -1,18 +1,42 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+
+const contacts = [
+ {
+   "id": "karen",
+   "name": "Karen Isgrigg",
+   "handle": "karen_isgrigg",
+   "avatarURL": "http://localhost:5001/karen.jpg"
+ },
+ {
+   "id": "richard",
+   "name": "Richard Kalehoff",
+   "handle": "richardkalehoff",
+   "avatarURL": "http://localhost:5001/richard.jpg"
+ },
+ {
+   "id": "tyler",
+   "name": "Tyler McGinnis",
+   "handle": "tylermcginnis",
+   "avatarURL": "http://localhost:5001/tyler.jpg"
+ }
+];
+
+class User extends React.Component{
+  render() {
+    return (
+      <div>
+        <p>Name: {this.props.username}</p>
+        <p>A friend? {this.props.friend} </p>
+      </div>
+    );
+  }
+}
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      <div>
+        <User username="Abc" friend={true} ></User>
       </div>
     );
   }
