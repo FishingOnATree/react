@@ -27,7 +27,9 @@ class ListContacts extends Component {
           />
         </div>
         <ol className='contact-list'>
-          {this.props.contacts.map((contact) => (
+          {this.props.contacts
+            .filter((contact) => (contact.name.toLowerCase().includes(this.state.query.toLowerCase())))
+            .map((contact) => (
             <li key={contact.id} className="contact-list-item">
               <div className="contact-avatar" style={{backgroundImage: `url(${contact.avatarURL})`}}>
               </div>
