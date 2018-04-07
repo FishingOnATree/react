@@ -12,11 +12,16 @@ class ListContacts extends Component {
   updateQuery = (query) => {
     this.setState(() => ({query: query.trim()}))
   };
+  resetQuery = (query) => {
+    this.updateQuery('')
+  };
   render() {
     console.log('Props', this.props)
+    const showingContacts = this.state.query === ''
+      ? this.props.contacts: this.props.contacts.filter((c) => (
+          c.name.toLowerCase().includes(this.state.query.toLowerCase())));
     return (
       <div className='list-contacts'>
-        {JSON.stringify(this.state)}
         <div className='list-contacts-top'>
           <input
             className='search-contacts'
@@ -26,9 +31,14 @@ class ListContacts extends Component {
             onChange={(event) => this.updateQuery(event.target.value)}
           />
         </div>
+        {showingContacts.length !== this.props.contacts.length && (
+          <div className='showing-contacts'>
+            <span>Now showing {showingContacts.length} of {this.props.contacts.length}</span>
+            <button onClick={this.resetQuery}>Show all</button>
+          </div>
+        )}
         <ol className='contact-list'>
-          {this.props.contacts
-            .filter((contact) => (contact.name.toLowerCase().includes(this.state.query.toLowerCase())))
+          {showingContacts
             .map((contact) => (
             <li key={contact.id} className="contact-list-item">
               <div className="contact-avatar" style={{backgroundImage: `url(${contact.avatarURL})`}}>
