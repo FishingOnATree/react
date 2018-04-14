@@ -22,7 +22,7 @@ class CreateContacts extends Component {
         </Link>
         <form onSubmit={this.handleSummit} className='create-contact-form'>
           <ImageInput
-            className='creagte-contact-avatar-input'
+            className='create-contact-avatar-input'
             name='avatarURL'
             maxHeight={64}
           />
