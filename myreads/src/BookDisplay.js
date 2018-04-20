@@ -25,4 +25,4 @@ class BookDisplay extends Component {
   }
 }
 
-export default BookDisplay
+export default BookDisplay;
