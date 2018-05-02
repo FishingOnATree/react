@@ -34,10 +34,10 @@ class Bookshelf {
 }
 
 class Library {
-  constructor(bookshelfList, bookshelfTitleList) {
+  constructor(bookshelfList) {
     this.bookshelves = [bookshelfList.length];
     for (var i=0; i<bookshelfList.length; i++) {
-      this.bookshelves[i] = new Bookshelf(bookshelfList[i], bookshelfTitleList[i]);
+      this.bookshelves[i] = new Bookshelf(bookshelfList[i][0], bookshelfList[i][1]);
     }
   }
 

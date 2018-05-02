@@ -4,10 +4,12 @@ import './App.css'
 import BookshelfDisplay from './BookshelfDisplay'
 import {Book, Bookshelf, Library} from './objects.js'
 
-const bookshelfList = ['reading', 'want', 'read', 'none'];
-const bookshelfTitleList = ['Currently Reading', 'Want to Read', 'Read', 'Not categorized'];
+const bookshelfList = [['reading', 'Currently Reading'],
+                       ['want', 'Want to Read'],
+                       ['read', 'Read'],
+                       ['none', 'Not categorized']];
 
-var myLib = new Library(bookshelfList, bookshelfTitleList);
+var myLib = new Library(bookshelfList);
 
 function populateExamples() {
   var book1 = new Book('To Kill a Mockingbird', 'Harper Lee', 'http://books.google.com/books/content?id=PGR2AwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE73-GnPVEyb7MOCxDzOYF1PTQRuf6nCss9LMNOSWBpxBrz8Pm2_mFtWMMg_Y1dx92HT7cUoQBeSWjs3oEztBVhUeDFQX6-tWlWz1-feexS0mlJPjotcwFqAg6hBYDXuK_bkyHD-y&source=gbs_api');
@@ -70,7 +72,7 @@ class BooksApp extends React.Component {
               <div>
                 {myLib.bookshelves
                   .map((bookshelf) => (
-                    <BookshelfDisplay bookshelf={bookshelf} />
+                    <BookshelfDisplay bookshelf={bookshelf} bookshelfList={bookshelfList}/>
                   ))
                 }
               </div>

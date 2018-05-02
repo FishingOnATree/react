@@ -6,12 +6,12 @@ class BookMove extends Component{
       <div className="book-shelf-changer">
         <select>
           <option value="none" disabled>Move to...</option>
-          <option value="currentlyReading">Currently Reading</option>
-          <option value="wantToRead">Want to Read</option>
-          <option value="read">Read</option>
-          <option value="none">None</option>
+          {this.props.bookshelfList.map((shelf) => (
+            <option value={shelf[0]}>{shelf[1]}</option>
+          ))
+          }
         </select>
-      </div>      
+      </div>
     )
   }
 }
