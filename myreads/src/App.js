@@ -2,12 +2,11 @@ import React from 'react'
 // import * as BooksAPI from './BooksAPI'
 import './App.css'
 import BookshelfDisplay from './BookshelfDisplay'
-import {Book, Bookshelf, Library} from './objects.js'
+import {Book, Library} from './objects.js'
 
 const bookshelfList = [['reading', 'Currently Reading'],
                        ['want', 'Want to Read'],
-                       ['read', 'Read'],
-                       ['none', 'Not categorized']];
+                       ['read', 'Read']];
 
 var myLib = new Library(bookshelfList);
 
@@ -72,7 +71,11 @@ class BooksApp extends React.Component {
               <div>
                 {myLib.bookshelves
                   .map((bookshelf) => (
-                    <BookshelfDisplay bookshelf={bookshelf} bookshelfList={bookshelfList}/>
+                    <BookshelfDisplay
+                      bookshelf={bookshelf}
+                      bookshelfList={bookshelfList}
+                      bookMover={myLib.moveBook}
+                    />
                   ))
                 }
               </div>

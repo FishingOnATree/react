@@ -35,7 +35,7 @@ class Bookshelf {
 
 class Library {
   constructor(bookshelfList) {
-    this.bookshelves = [bookshelfList.length];
+    this.bookshelves = new Array(bookshelfList.length);
     for (var i=0; i<bookshelfList.length; i++) {
       this.bookshelves[i] = new Bookshelf(bookshelfList[i][0], bookshelfList[i][1]);
     }
@@ -50,6 +50,7 @@ class Library {
   }
 
   moveBook(book, fromShelf, targetShelf) {
+    console.log("move book");
     this.bookshelves.forEach((shelf) => {
       if (shelf.key === fromShelf) {
         shelf.removeBook(book);
