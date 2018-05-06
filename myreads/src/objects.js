@@ -1,7 +1,7 @@
 
 class Book{
   constructor(id, title, authors, coverImageUrl) {
-    this.is = id;
+    this.id = id;
     this.title = title;
     this.authors = authors;
     this.coverImageUrl = coverImageUrl;
@@ -16,26 +16,13 @@ class Bookshelf {
   }
 
   addBook(book) {
-    //TODO: check duplicates
     this.books.push(book)
   }
 
   removeBook(target) {
-    // TODO: fix remove book
-    // this.books = this.books.filter((book) => {
-    //   console.log(target.id + " vs " + book.id)
-    //   return target.id != book.id
-    // })
-    var index = -1;
-    for (var i=0; i<this.books.length; i++) {
-      var book = this.books[i];
-      if (target.id === book.id) {
-        index = i;
-      }
-    }
-    if (index >= 0) {
-      this.books.pop(index)
-    }
+    this.books = this.books.filter((book) => {
+      return target.id != book.id
+    });
   }
 }
 
@@ -56,10 +43,8 @@ class Library {
   }
 
   moveBook(book, fromShelf, targetShelf) {
-    console.log("move book from: " + fromShelf + " to: " + targetShelf);
     this.bookshelves.forEach((shelf) => {
       if (shelf.key === fromShelf) {
-        console.log("removeBook");
         shelf.removeBook(book);
       } else if (shelf.key === targetShelf) {
         shelf.addBook(book);
