@@ -6,15 +6,14 @@ class BookMove extends Component{
     const book = this.props.book;
     return (
       <div className="book-shelf-changer">
-        <select onChange={(event) => {
+        <select value={srcShelf} onChange={(event) => {
           var targetShelf = event.target.value;
-          console.log(targetShelf);
           this.props.bookMover(book, srcShelf, targetShelf);
         }}>
           <option value="none" disabled>Move to...</option>
-          {this.props.bookshelfList.map((shelf) => (
-            <option value={shelf[0]}>{shelf[1]}</option>
-          ))
+          {this.props.bookshelfList.map((shelf) => {
+            return <option key={shelf[0]} value={shelf[0]}>{shelf[1]}</option>
+          })
           }
         </select>
       </div>

@@ -9,11 +9,11 @@ class BookshelfDisplay extends Component {
         <div className="bookshelf-books">
           <ol className="books-grid">
             {this.props.bookshelf.books.map((book) => (
-              <li key={book.title}>
+              <li key={book.id} >
                 <BookDisplay
                   book={book}
                   bookMover={this.props.bookMover}
-                  bookshelf={this.props.shelf}
+                  bookshelf={this.props.bookshelf.key}
                   bookshelfList={this.props.bookshelfList}
                 />
               </li>

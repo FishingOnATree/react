@@ -1,6 +1,7 @@
 
 class Book{
-  constructor(title, authors, coverImageUrl) {
+  constructor(id, title, authors, coverImageUrl) {
+    this.is = id;
     this.title = title;
     this.authors = authors;
     this.coverImageUrl = coverImageUrl;
@@ -20,10 +21,15 @@ class Bookshelf {
   }
 
   removeBook(target) {
+    // TODO: fix remove book
+    // this.books = this.books.filter((book) => {
+    //   console.log(target.id + " vs " + book.id)
+    //   return target.id != book.id
+    // })
     var index = -1;
     for (var i=0; i<this.books.length; i++) {
       var book = this.books[i];
-      if (target.title === book.title && target.author === book.author) {
+      if (target.id === book.id) {
         index = i;
       }
     }
@@ -50,9 +56,10 @@ class Library {
   }
 
   moveBook(book, fromShelf, targetShelf) {
-    console.log("move book");
+    console.log("move book from: " + fromShelf + " to: " + targetShelf);
     this.bookshelves.forEach((shelf) => {
       if (shelf.key === fromShelf) {
+        console.log("removeBook");
         shelf.removeBook(book);
       } else if (shelf.key === targetShelf) {
         shelf.addBook(book);
