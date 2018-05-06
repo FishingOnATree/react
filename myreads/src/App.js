@@ -1,9 +1,10 @@
-import React from 'react'
+import React from 'react';
 // import * as BooksAPI from './BooksAPI'
-import './App.css'
-import BookshelfDisplay from './BookshelfDisplay'
-import {Book, Library} from './objects.js'
-import { Link, Route } from 'react-router-dom'
+import './App.css';
+import BookshelfDisplay from './BookshelfDisplay';
+import BookSearch from './BookSearch';
+import {Book, Library} from './objects.js';
+import { Link, Route } from 'react-router-dom';
 
 const bookshelfList = [['reading', 'Currently Reading'],
                        ['want', 'Want to Read'],
@@ -33,38 +34,23 @@ class BooksApp extends React.Component {
 
   componentDidMount() {
     populateExamples();
-    this.setState(() => ({library: myLib}));
+    this.setState((currentState) => ({library: currentState.library}));
   }
 
   moveBook = (book, fromShelf, toShelf) => {
     myLib.moveBook(book, fromShelf, toShelf);
-    this.setState(() => ({library: myLib}));
+    this.setState((currentState) => ({library: currentState.library}));
+  }
+
+  addBook = (book, shelf) => {
+    myLib.addBook(book, shelf);
   }
 
   render() {
     return (
       <div className="app">
         <Route path='/add' render = {({ history} ) => (
-          <div className="search-books">
-            <div className="search-books-bar">
-              <a className="close-search" onClick={() => history.push('/')}>Close</a>
-              <div className="search-books-input-wrapper">
-                {/*
-                  NOTES: The search from BooksAPI is limited to a particular set of search terms.
-                  You can find these search terms here:
-                  https://github.com/udacity/reactnd-project-myreads-starter/blob/master/SEARCH_TERMS.md
-
-                  However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
-                  you don't find a specific author or title. Every search is limited by search terms.
-                */}
-                <input type="text" placeholder="Search by title or author"/>
-
-              </div>
-            </div>
-            <div className="search-books-results">
-              <ol className="books-grid"></ol>
-            </div>
-          </div>
+          <BookSearch addBook={this.addBook} />
         )} />
         <Route exact path='/' render={() => (
           <div className="list-books">

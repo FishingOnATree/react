@@ -1,6 +1,14 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class BookMove extends Component{
+  static propTypes = {
+    book: PropTypes.object.isRequired,
+    bookMover: PropTypes.func.isRequired,
+    bookshelf: PropTypes.string.isRequired,
+    bookshelfList: PropTypes.array.isRequired
+  }
+
   render() {
     const srcShelf = this.props.bookshelf;
     const book = this.props.book;
