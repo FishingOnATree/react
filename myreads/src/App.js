@@ -41,12 +41,13 @@ class BooksApp extends React.Component {
   }
 
   addBook = (book, shelf) => {
+    BooksAPI.update(book, shelf);
     this.state.library.addBook(book, shelf);
     this.setState((currentState) => ({library: currentState.library}));
   }
 
   hasBook = (book) => {
-    return this.state.library.hasBook(book.id);
+    return this.state.library.hasBook(book);
   }
 
   render() {

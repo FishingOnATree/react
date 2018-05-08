@@ -23,6 +23,7 @@ class BookDisplay extends Component {
         </div>
         <div className="book-title">{this.props.book.title}</div>
         <div className="book-authors">{this.props.book.authors}</div>
+        <div className="book-authors">{this.props.book.id}</div>
       </div>
     )
   }

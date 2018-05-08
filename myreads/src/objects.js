@@ -39,9 +39,9 @@ class Library {
     this.bookshelves.forEach((shelf) => {
       if (shelf.key === targetShelf) {
         shelf.addBook(book)
+        this.bookIndex.add(book.id);
       }
     });
-    this.bookIndex.add(book.id);
   }
 
   moveBook(book, fromShelf, targetShelf) {
@@ -54,8 +54,8 @@ class Library {
     });
   }
 
-  hasBook(id) {
-    return this.bookIndex.has(id);
+  hasBook(book) {
+    return this.bookIndex.has(book.id);
   }
 }
 
