@@ -12,16 +12,16 @@ class Bookshelf {
   constructor(key, title) {
     this.key = key;
     this.title = title;
-    this.books = []
+    this.books = [];
   }
 
   addBook(book) {
-    this.books.push(book)
+    this.books.push(book);
   }
 
   removeBook(target) {
     this.books = this.books.filter((book) => {
-      return target.id != book.id
+      return target.id !== book.id
     });
   }
 }
@@ -32,6 +32,7 @@ class Library {
     for (var i=0; i<bookshelfList.length; i++) {
       this.bookshelves[i] = new Bookshelf(bookshelfList[i][0], bookshelfList[i][1]);
     }
+    this.bookIndex = new Set();
   }
 
   addBook(book, targetShelf) {
@@ -40,6 +41,7 @@ class Library {
         shelf.addBook(book)
       }
     });
+    this.bookIndex.add(book.id);
   }
 
   moveBook(book, fromShelf, targetShelf) {
@@ -50,6 +52,10 @@ class Library {
         shelf.addBook(book);
       }
     });
+  }
+
+  hasBook(id) {
+    return this.bookIndex.has(id);
   }
 }
 
