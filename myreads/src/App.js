@@ -20,7 +20,7 @@ class BooksApp extends React.Component {
     var promise = BooksAPI.getAll();
     promise.then((fulfilled) => {
       fulfilled.forEach((x) => {
-        var book = new Book(x['id'], x['title'], x['authors'], x['imageLinks']['thumbnail']);
+        var book = Book.parse(x);
         var shelf = x['shelf'];
         myLib.addBook(book, shelf);
       });
@@ -41,12 +41,13 @@ class BooksApp extends React.Component {
   }
 
   addBook = (book, shelf) => {
+    BooksAPI.update(book, shelf);
     this.state.library.addBook(book, shelf);
     this.setState((currentState) => ({library: currentState.library}));
   }
 
   hasBook = (book) => {
-    return this.state.library.hasBook(book.id);
+    return this.state.library.hasBook(book);
   }
 
   render() {

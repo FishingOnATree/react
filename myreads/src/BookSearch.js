@@ -1,11 +1,18 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Route, Link } from 'react-router-dom';
-import Book from './objects';
+import { Book } from './objects';
 import BookDisplay from './BookDisplay';
 import * as BooksAPI from './BooksAPI'
 
+const DEFAULT_SHELF = "none";
+
 class BookSearch extends Component {
+  constructor(props) {
+    super(props);
+    this.addBook = this.addBook.bind(this);
+  }
+
   static propTypes = {
     addBook: PropTypes.func.isRequired,
     hasBook: PropTypes.func.isRequired,
@@ -13,25 +20,29 @@ class BookSearch extends Component {
   }
 
   state = {
-    books: []
+    books: [],
+    totalFound: 0
   }
 
-  addBook(book, shelf) {
-      this.props.addBook(book, shelf);
-      this.setState((currentState) => ({
-          books: currentState.books.filter((b) => {
-            return b.id !== book.id
-          })
-      }));
+  addBook(book, srcShelf, toShelf) {
+    //src is always "none", which is ignored by addBook.
+    this.props.addBook(book, toShelf);
+    this.setState((currentState) => ({
+        books: currentState.books.filter(x => (!this.props.hasBook(x)))
+    }));
   }
 
-  handleSearch(event) {
-    var terms = event.target.value;
-    console.log("key = " + terms);
+  handleSearch(terms) {
     if (terms.length === 0) {
       this.setState(() => ({books: []}));
-    } else if (terms.length >= 3) {
-      console.log("searching");
+    } else if (terms.trim().length >= 3) {
+      var promise = BooksAPI.search(terms);
+      promise.then((fulfilled) => {
+        var books = fulfilled.map(x => Book.parse(x));
+        this.setState(() => ({books: books.filter(x => (!this.props.hasBook(x))), totalFound: books.length}));
+      }).catch(function (error) {
+        console.log(error);
+      });
     }
   }
 
@@ -49,7 +60,10 @@ class BookSearch extends Component {
               However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
               you don't find a specific author or title. Every search is limited by search terms.
             */}
-            <input type="text" placeholder="Search by title or author" onChange={this.handleSearch}/>
+            <input
+              type="text"
+              placeholder="Search by title or author. Input at least 3 characters"
+              onChange={event => this.handleSearch(event.target.value.trim())}/>
 
           </div>
         </div>
@@ -60,13 +74,18 @@ class BookSearch extends Component {
                 <BookDisplay
                   key={book.id}
                   book={book}
-                  bookMover={this.props.bookMover}
-                  bookshelf="none"
+                  bookMover={this.addBook}
+                  bookshelf={DEFAULT_SHELF}
                   bookshelfList={this.props.bookshelfList}
                 />
               ))
             }
           </ol>
+        </div>
+        <div className="search-info">
+          Search completed at <b>{(new Date()).toString()}</b> <br />
+          Books found by search: <b>{this.state.totalFound}</b>. <br />
+          Books already on shelf and hidden: {this.state.totalFound - this.state.books.length}
         </div>
       </div>
     )

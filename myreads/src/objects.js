@@ -1,10 +1,25 @@
+const NO_IMAGE_URL = '/noimage.png';
 
 class Book{
+
   constructor(id, title, authors, coverImageUrl) {
     this.id = id;
     this.title = title;
     this.authors = authors;
     this.coverImageUrl = coverImageUrl;
+  }
+
+  static parse(data) {
+    var id = data['id'];
+    var title = data['title'];
+    var authors = data['authors']
+    var imgURL;
+    try {
+       imgURL = data['imageLinks']['thumbnail'];
+    } catch (err) {
+       imgURL = NO_IMAGE_URL;
+    }
+    return new Book(id, title, authors, imgURL);
   }
 }
 
@@ -39,9 +54,9 @@ class Library {
     this.bookshelves.forEach((shelf) => {
       if (shelf.key === targetShelf) {
         shelf.addBook(book)
+        this.bookIndex.add(book.id);
       }
     });
-    this.bookIndex.add(book.id);
   }
 
   moveBook(book, fromShelf, targetShelf) {
@@ -54,8 +69,8 @@ class Library {
     });
   }
 
-  hasBook(id) {
-    return this.bookIndex.has(id);
+  hasBook(book) {
+    return this.bookIndex.has(book.id);
   }
 }
 
