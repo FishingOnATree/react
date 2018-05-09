@@ -1,10 +1,25 @@
+const NO_IMAGE_URL = '/noimage.png';
 
 class Book{
+
   constructor(id, title, authors, coverImageUrl) {
     this.id = id;
     this.title = title;
     this.authors = authors;
     this.coverImageUrl = coverImageUrl;
+  }
+
+  static parse(data) {
+    var id = data['id'];
+    var title = data['title'];
+    var authors = data['authors']
+    var imgURL;
+    try {
+       imgURL = data['imageLinks']['thumbnail'];
+    } catch (err) {
+       imgURL = NO_IMAGE_URL;
+    }
+    return new Book(id, title, authors, imgURL);
   }
 }
 

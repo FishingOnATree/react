@@ -20,7 +20,7 @@ class BooksApp extends React.Component {
     var promise = BooksAPI.getAll();
     promise.then((fulfilled) => {
       fulfilled.forEach((x) => {
-        var book = new Book(x['id'], x['title'], x['authors'], x['imageLinks']['thumbnail']);
+        var book = Book.parse(x);
         var shelf = x['shelf'];
         myLib.addBook(book, shelf);
       });
