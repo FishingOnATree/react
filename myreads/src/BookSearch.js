@@ -38,7 +38,7 @@ class BookSearch extends Component {
     } else if (terms.trim().length >= 3) {
       var promise = BooksAPI.search(terms);
       promise.then((fulfilled) => {
-        var books = fulfilled.map(x => Book.parse(x));
+        let books = fulfilled.map(x => Book.parse(x));
         this.setState(() => ({books: books.filter(x => (!this.props.hasBook(x))), totalFound: books.length}));
       }).catch(function (error) {
         console.log(error);

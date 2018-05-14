@@ -20,8 +20,8 @@ class BooksApp extends React.Component {
     var promise = BooksAPI.getAll();
     promise.then((fulfilled) => {
       fulfilled.forEach((x) => {
-        var book = Book.parse(x);
-        var shelf = x['shelf'];
+        let book = Book.parse(x);
+        let shelf = x['shelf'];
         myLib.addBook(book, shelf);
       });
       this.setState((currentState) => ({library: currentState.library}));
@@ -35,15 +35,17 @@ class BooksApp extends React.Component {
   }
 
   moveBook = (book, fromShelf, toShelf) => {
-    BooksAPI.update(book, toShelf);
-    this.state.library.moveBook(book, fromShelf, toShelf);
-    this.setState((currentState) => ({library: currentState.library}));
+    BooksAPI.update(book, toShelf).then((result) => {
+      this.state.library.moveBook(book, fromShelf, toShelf);
+      this.setState((currentState) => ({library: currentState.library}));
+    });
   }
 
   addBook = (book, shelf) => {
-    BooksAPI.update(book, shelf);
-    this.state.library.addBook(book, shelf);
-    this.setState((currentState) => ({library: currentState.library}));
+    BooksAPI.update(book, shelf).then((result) => {
+      this.state.library.addBook(book, shelf);
+      this.setState((currentState) => ({library: currentState.library}));
+    });
   }
 
   hasBook = (book) => {
@@ -53,7 +55,7 @@ class BooksApp extends React.Component {
   render() {
     return (
       <div className="app">
-        <Route path='/add' render = {({ history} ) => (
+        <Route path='/search' render = {({ history} ) => (
           <BookSearch
             addBook={this.addBook}
             hasBook={this.hasBook}
@@ -80,7 +82,7 @@ class BooksApp extends React.Component {
               </div>
             </div>
             <div className="open-search">
-              <Link to='/add'>Add a book</Link>
+              <Link to='/search'>Add a book</Link>
             </div>
           </div>
         )} />

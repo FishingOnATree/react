@@ -3,17 +3,15 @@ import BookMove from './BookMove.js';
 import PropTypes from 'prop-types';
 
 class BookDisplay extends Component {
-  static propTypes = {
-    book: PropTypes.object.isRequired,
-    bookMover: PropTypes.func.isRequired,
-    bookshelfList: PropTypes.array.isRequired
-  }
 
   render() {
     return (
       <div className="book">
         <div className="book-top">
-          <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${this.props.book.coverImageUrl})` }}></div>
+          <div
+            className="book-cover"
+            style={{ width: 128, height: 193, backgroundImage: `url(${this.props.book.coverImageUrl})` }}
+          />
           <BookMove
             book={this.props.book}
             bookMover={this.props.bookMover}
@@ -27,6 +25,12 @@ class BookDisplay extends Component {
       </div>
     )
   }
+}
+
+BookDisplay.propTypes = {
+  book: PropTypes.object.isRequired,
+  bookMover: PropTypes.func.isRequired,
+  bookshelfList: PropTypes.array.isRequired
 }
 
 export default BookDisplay;

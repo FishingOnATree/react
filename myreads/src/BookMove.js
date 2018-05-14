@@ -11,7 +11,7 @@ class BookMove extends Component{
 
   render() {
     const srcShelf = this.props.bookshelf;
-    const book = this.props.book;
+    const {book} = this.props;
     return (
       <div className="book-shelf-changer">
         <select value={srcShelf} onChange={(event) => {

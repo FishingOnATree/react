@@ -3,12 +3,6 @@ import BookDisplay from './BookDisplay';
 import PropTypes from 'prop-types';
 
 class BookshelfDisplay extends Component {
-  static propTypes = {
-    bookshelf: PropTypes.object.isRequired,
-    bookMover: PropTypes.func.isRequired,
-    bookshelfList: PropTypes.array.isRequired
-  }
-
   render() {
     return (
       <div className="bookshelf">
@@ -30,6 +24,12 @@ class BookshelfDisplay extends Component {
       </div>
     )
   }
+}
+
+BookshelfDisplay.propTypes = {
+  bookshelf: PropTypes.object.isRequired,
+  bookMover: PropTypes.func.isRequired,
+  bookshelfList: PropTypes.array.isRequired
 }
 
 export default BookshelfDisplay;
