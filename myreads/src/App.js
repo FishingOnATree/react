@@ -4,7 +4,7 @@ import './App.css';
 import BookshelfDisplay from './BookshelfDisplay';
 import BookSearch from './BookSearch';
 import {Book, Library} from './objects.js';
-import { Link, Route } from 'react-router-dom';
+import { Link, Route, Switch } from 'react-router-dom';
 
 const bookshelfList = [['currentlyReading', 'Currently Reading'],
                        ['wantToRead', 'Want to Read'],
@@ -55,37 +55,42 @@ class BooksApp extends React.Component {
   render() {
     return (
       <div className="app">
-        <Route path='/search' render = {({ history} ) => (
-          <BookSearch
-            addBook={this.addBook}
-            hasBook={this.hasBook}
-            bookshelfList={bookshelfList}
-          />
-        )} />
-        <Route exact path='/' render={() => (
-          <div className="list-books">
-            <div className="list-books-title">
-              <h1>MyReads</h1>
-            </div>
-            <div className="list-books-content">
-              <div>
-                {this.state.library.bookshelves
-                  .map((bookshelf) => (
-                    <BookshelfDisplay
-                      key={bookshelf.key}
-                      bookshelf={bookshelf}
-                      bookshelfList={bookshelfList}
-                      bookMover={this.moveBook}
-                    />
-                  ))
-                }
+        <Switch>
+          <Route exact path='/search' render = {({ history} ) => (
+            <BookSearch
+              addBook={this.addBook}
+              hasBook={this.hasBook}
+              bookshelfList={bookshelfList}
+            />
+          )} />
+          <Route exact path='/' render={() => (
+            <div className="list-books">
+              <div className="list-books-title">
+                <h1>MyReads</h1>
+              </div>
+              <div className="list-books-content">
+                <div>
+                  {this.state.library.bookshelves
+                    .map((bookshelf) => (
+                      <BookshelfDisplay
+                        key={bookshelf.key}
+                        bookshelf={bookshelf}
+                        bookshelfList={bookshelfList}
+                        bookMover={this.moveBook}
+                      />
+                    ))
+                  }
+                </div>
+              </div>
+              <div className="open-search">
+                <Link to='/search'>Add a book</Link>
               </div>
             </div>
-            <div className="open-search">
-              <Link to='/search'>Add a book</Link>
-            </div>
-          </div>
-        )} />
+          )} />
+          <Route path='*' render= {() =>(
+            <h1>404 - Page not found</h1>
+          )} />
+        </Switch>
       </div>
     )
   }

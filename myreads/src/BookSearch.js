@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Route, Link } from 'react-router-dom';
 import { Book } from './objects';
+import {DebounceInput} from 'react-debounce-input';
 import BookDisplay from './BookDisplay';
 import * as BooksAPI from './BooksAPI'
 
@@ -11,12 +12,6 @@ class BookSearch extends Component {
   constructor(props) {
     super(props);
     this.addBook = this.addBook.bind(this);
-  }
-
-  static propTypes = {
-    addBook: PropTypes.func.isRequired,
-    hasBook: PropTypes.func.isRequired,
-    bookshelfList: PropTypes.array.isRequired
   }
 
   state = {
@@ -35,9 +30,11 @@ class BookSearch extends Component {
   handleSearch(terms) {
     if (terms.length === 0) {
       this.setState(() => ({books: []}));
-    } else if (terms.trim().length >= 3) {
-      var promise = BooksAPI.search(terms);
+    } else if (terms.length >= 3) {
+      console.log(terms);
+      let promise = BooksAPI.search(terms);
       promise.then((fulfilled) => {
+        console.log(fulfilled);
         let books = fulfilled.map(x => Book.parse(x));
         this.setState(() => ({books: books.filter(x => (!this.props.hasBook(x))), totalFound: books.length}));
       }).catch(function (error) {
@@ -60,11 +57,10 @@ class BookSearch extends Component {
               However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
               you don't find a specific author or title. Every search is limited by search terms.
             */}
-            <input
-              type="text"
+            <DebounceInput
+              debounceTimeout={300}
               placeholder="Search by title or author. Input at least 3 characters"
               onChange={event => this.handleSearch(event.target.value.trim())}/>
-
           </div>
         </div>
         <div className="search-books-results">
@@ -92,4 +88,9 @@ class BookSearch extends Component {
   }
 }
 
+BookSearch.propTypes = {
+  addBook: PropTypes.func.isRequired,
+  hasBook: PropTypes.func.isRequired,
+  bookshelfList: PropTypes.array.isRequired
+}
 export default BookSearch;
