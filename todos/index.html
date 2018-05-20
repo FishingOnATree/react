@@ -113,18 +113,36 @@
     //     goals: goals(state.goals, action),
     //   }
     // }
+    const checker = (store) => (next) => (action) => {
+      if (action.type === ADD_TODO && action.todo.name.toLowerCase().includes('bitcoin')) {
+        return alert ('Bitcoin');
+      } else if (action.type === ADD_GOAL && action.goal.name.toLowerCase().includes('bitcoin')) {
+        return alert ('Bitcoin');
+      } else {
+        return next(action);
+      }
+    };
+
+    const logger = (store) => (next) => (action) => {
+      console.group(action.type);
+        console.log(action);
+        const result = next(action);
+        console.log(store.getState());
+      console.groupEnd();
+      return result;
+    }
+
     const store = Redux.createStore(Redux.combineReducers({
       todos,
       goals,
-    }));
-    
+    }), Redux.applyMiddleware(checker, logger));
+
     store.subscribe(() => {
       const { goals, todos } = store.getState();
       document.getElementById('todos').innerHTML = '';
       todos.forEach(addTodoToDom);
       document.getElementById('goals').innerHTML = '';
       goals.forEach(addGoalToDom);
-      console.log('The new state is: ', store.getState())
     })
 
     function addTodo() {
