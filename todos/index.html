@@ -102,6 +102,14 @@
           return state
       }
     }
+    function loading(state = true, action) {
+      switch(action.type) {
+        case RECEIVE_DATA:
+          return false;
+        default:
+          return state;
+      }
+    }
 
     const checker = (store) => (next) => (action) => {
       if (action.type === ADD_TODO && action.todo.name.toLowerCase().includes('bitcoin')) {
@@ -125,6 +133,7 @@
     const store = Redux.createStore(Redux.combineReducers({
       todos,
       goals,
+      loading,
     }), Redux.applyMiddleware(checker, logger));
 
     store.subscribe(() => {
@@ -289,13 +298,17 @@
 
       render() {
         const { store } = this.props;
-        const { todos, goals } = store.getState();
-        return (
-          <div>
-            <Todos store={this.props.store} todos={todos} />
-            <Goals store={this.props.store} goals={goals} />
-          </div>
-        )
+        const { todos, goals, loading } = store.getState();
+        if (loading == true) {
+          return <h3>Loading</h3>
+        } else {
+          return (
+            <div>
+              <Todos store={this.props.store} todos={todos} />
+              <Goals store={this.props.store} goals={goals} />
+            </div>
+          )
+        }
       }
     }
 
