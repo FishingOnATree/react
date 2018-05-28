@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import Tweet from './Tweet'
+import NewTweet from './NewTweet'
 
 class Dashboard extends Component {
   render() {
