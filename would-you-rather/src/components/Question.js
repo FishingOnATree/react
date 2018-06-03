@@ -11,8 +11,9 @@ class Question extends Component {
 }
 
 
-function mapStateToProps ({ id }) {
-  return {id: "123"};
+function mapStateToProps ({ authedUser }, props) {
+  const { id } = props.match.params
+  return {id};
 }
 
 export default withRouter(connect(mapStateToProps)(Question));
