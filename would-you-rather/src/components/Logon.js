@@ -1,25 +1,26 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-
+import { login } from '../actions/AuthedUser'
 class Logon extends Component {
 
   render() {
     const { userIds, users } = this.props;
     return (
       <div className='logon' >
-        <h3>Please log in</h3>
-        { userIds.map((userId) => {
-            const user = users[userId];
-            return (
-              <div key={user.id} >
-                <label >
-                  <input type="radio" value={user.id} id={user.id} />
-                  {user.name}
-                </label>
-              </div>
-            )
-          })
-        }
+        <div>
+          <h3>Please log in</h3>
+          <ul>
+            { userIds.map((userId) => {
+                const user = users[userId];
+                return (
+                  <li key={user.id}>
+                    <a onClick={() => this.props.dispatch(login(user.id))}>{user.name}</a>
+                  </li>
+                )
+              })
+            }
+          </ul>
+        </div>
       </div>
     )
   }

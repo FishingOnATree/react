@@ -1,28 +1,36 @@
 import React, { Component, Fragment } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { connect } from 'react-redux'
+
 import LoadingBar from 'react-redux-loading';
+import Logon from './Logon';
 import Leaderboard from './Leaderboard';
-import QuestionList from './QuestionList';
+import Nav from './Nav';
 import NewQuestion from './NewQuestion';
 import Question from './Question';
-import Logon from './Logon';
-import Nav from './Nav';
+import QuestionList from './QuestionList';
+
 import { load_data } from '../actions/load_data'
+import { logout } from '../actions/AuthedUser'
 
 class App extends Component {
   componentDidMount() {
     this.props.dispatch(load_data())
   }
   render() {
+    const { authedUser, users, dispatch } = this.props;
     return (
       <Router>
         <Fragment>
           <LoadingBar />
           <div className='container'>
-            <Nav />
-              { this.props.singedIn === true ?
+              { authedUser !== null ?
                 <div>
+                  <div>
+                    <span> Logged in as {users[authedUser].name} </span>
+                    <div><a onClick={ () => dispatch(logout())}>Log out</a></div>
+                  </div>
+                  <Nav />
                   <Route path='/' exact component={QuestionList} />
                   <Route path='/question/:id' component={Question} />
                   <Route path='/add' component={NewQuestion} />
@@ -40,9 +48,10 @@ class App extends Component {
   }
 }
 
-function mapStateToProps ({ authedUser }) {
+function mapStateToProps ({ authedUser, users }) {
   return {
-    singedIn: authedUser !== null
+    authedUser,
+    users
   }
 }
 
