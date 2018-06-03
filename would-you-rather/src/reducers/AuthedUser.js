@@ -1,4 +1,5 @@
 import { SET_AUTHED_USER, LOG_OUT } from '../actions/AuthedUser'
+
 export default function authedUser(state = null, action) {
   switch(action.type) {
     case SET_AUTHED_USER:
