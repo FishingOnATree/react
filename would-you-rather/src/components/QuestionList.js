@@ -14,8 +14,8 @@ class QuestionList extends Component {
       <div className='contents'>
         <h3>QuestionList - {viewAnswered ? "Answered" : "Unanswered"}</h3>
         <div>
-          <a onClick={this.viewAnsweredPage(false)}>View Unanswered</a> |
-          <a onClick={this.viewAnsweredPage(true)}>View Answered</a>
+          <a onClick={() => this.viewAnsweredPage(false)}>View Unanswered</a> |
+          <a onClick={() => this.viewAnsweredPage(true)}>View Answered</a>
         </div>
         <ul>
           { questionIds.filter((id) => (id in user.answers === viewAnswered))

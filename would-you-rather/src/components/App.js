@@ -10,7 +10,7 @@ import NewQuestion from './NewQuestion';
 import Question from './Question';
 import QuestionList from './QuestionList';
 
-import { load_data } from '../actions/load_data'
+import { load_data } from '../actions/shared'
 import { logout } from '../actions/AuthedUser'
 
 class App extends Component {
