@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { formatDate } from '../utils/utils'
-import { updateViewAnswered } from '../actions/ViewAnswered'
+import { Link } from 'react-router-dom';
+import { formatDate } from '../utils/utils';
+import { updateViewAnswered } from '../actions/ViewAnswered';
+
 
 class QuestionList extends Component {
   updateViewAnsweredChoice = (choice) => {
@@ -25,7 +27,11 @@ class QuestionList extends Component {
               .map((id) => {
                 const question = questions[id]
                 return (
-                  <li key={id}>{id} - {formatDate(question.timestamp)}</li>
+                  <li key={id}>
+                    <Link  to={`/question/${id}`}>
+                      {id} - {formatDate(question.timestamp)}
+                    </Link>
+                  </li>
                 )
               })
           }
