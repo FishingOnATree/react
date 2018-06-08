@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux';
+import { answerQuestion } from '../actions/Questions'
+import { addAnswer } from '../actions/Users'
 
 class Question extends Component {
+  answer = (option) => {
+    this.props.dispatch(answerQuestion(this.props.id, option, this.props.authedUser));
+    this.props.dispatch(addAnswer(this.props.id, option, this.props.authedUser));
+  }
+
   render() {
     const { id, authedUser, users, questions } = this.props;
     const answered = id in users[authedUser].answers;
@@ -24,10 +31,10 @@ class Question extends Component {
             ) : (
               <ul>
                 <li>
-                  Pick {questions[id].optionOne.text}
+                  Pick <a onClick={() => this.answer("optionOne")}>{questions[id].optionOne.text}</a>
                 </li>
                 <li>
-                  Pick {questions[id].optionTwo.text}
+                  Pick <a onClick={() => this.answer("optionTwo")}>{questions[id].optionTwo.text}</a>
                 </li>
               </ul>
             )
