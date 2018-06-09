@@ -1,7 +1,8 @@
 import {
   _getUsers,
   _getQuestions,
-  _saveQuestionAnswer
+  _saveQuestionAnswer,
+  _saveQuestion
 } from './_DATA.js'
 
 export function getInitialData () {
@@ -15,9 +16,17 @@ export function getInitialData () {
 }
 
 export function saveQuestionAnswer(params) {
-  return Promise.all(_saveQuestionAnswer(params))
+  return _saveQuestionAnswer(params)
     .then((result) => result)
     .catch((e) => {
       console.log("There is an error saving answer: " + e);
+    })
+}
+
+export function saveAddQuestion(question) {
+  return _saveQuestion(question)
+    .then((result) => result)
+    .catch((e) => {
+      console.log("There is an error adding new answer: " + e);
     })
 }
