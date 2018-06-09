@@ -8,7 +8,7 @@ export function receiveQuestions(questions) {
   }
 }
 
-export function answerQuestion(questionId, option, authedUser) {
+export function answerQuestion(authedUser, questionId, option) {
   return {
     type: ANSWER_QUESTION,
     questionId,

@@ -1,6 +1,7 @@
 import {
   _getUsers,
-  _getQuestions
+  _getQuestions,
+  _saveQuestionAnswer
 } from './_DATA.js'
 
 export function getInitialData () {
@@ -11,4 +12,12 @@ export function getInitialData () {
     users,
     questions,
   }))
+}
+
+export function saveQuestionAnswer(params) {
+  return Promise.all(_saveQuestionAnswer(params))
+    .then((result) => result)
+    .catch((e) => {
+      console.log("There is an error saving answer: " + e);
+    })
 }

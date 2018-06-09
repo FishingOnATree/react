@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux';
-import { answerQuestion } from '../actions/Questions'
-import { addAnswer } from '../actions/Users'
+import { handleAnswerQuestion } from '../actions/shared'
 
 class Question extends Component {
   answer = (option) => {
-    this.props.dispatch(answerQuestion(this.props.id, option, this.props.authedUser));
-    this.props.dispatch(addAnswer(this.props.id, option, this.props.authedUser));
+    this.props.dispatch(handleAnswerQuestion(this.props.authedUser, this.props.id, option));
   }
 
   render() {

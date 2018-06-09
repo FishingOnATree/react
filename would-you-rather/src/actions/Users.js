@@ -8,7 +8,7 @@ export function receiveUsers (users) {
   }
 }
 
-export function addAnswer (questionId, option, authedUser) {
+export function addAnswer(authedUser, questionId, option) {
   return {
     type: ADD_ANSWER,
     questionId,
