@@ -23,30 +23,37 @@ class App extends Component {
       <Router>
         <Fragment>
           <LoadingBar />
-          <div className='container'>
-              { authedUser !== null ?
-                <div>
-                  <div>
-                    <span> Logged in as {users[authedUser].name} </span>
-                    <div><a onClick={ () => dispatch(logout())}>Log out</a></div>
-                  </div>
+          { authedUser !== null ?
+            <div className='container'>
+              <div classname='col-container'>
+                <div className='col'>
                   <Nav />
-                  <Switch>
-                    <Route path='/' exact component={QuestionList} />
-                    <Route path='/question/:id' component={Question} />
-                    <Route path='/add' component={NewQuestion} />
-                    <Route path='/leaderboard' component={Leaderboard} />
-                    <Route path='*' render= {() =>(
-                      <h1>404 - Page not found</h1>
-                    )} />
-                    </Switch>
                 </div>
-                :
-                <div>
-                  <Logon />
+                <div className='col'>
+                  <div className='padding'></div>
                 </div>
-              }
-          </div>
+                <div className='col'>
+                  <div className='userpanel'>
+                    Logged in as {users[authedUser].name} (<a onClick={ () => dispatch(logout())}>Log out</a>)
+                  </div>
+                </div>
+              </div>
+              <div className="reset"></div>
+              <Switch>
+                <Route path='/' exact component={QuestionList} />
+                <Route path='/question/:id' component={Question} />
+                <Route path='/add' component={NewQuestion} />
+                <Route path='/leaderboard' component={Leaderboard} />
+                <Route path='*' render= {() =>(
+                  <h1>404 - Page not found</h1>
+                )} />
+              </Switch>
+            </div>
+            :
+            <div className='logon'>
+              <Logon />
+            </div>
+          }
         </Fragment>
       </Router>
     );

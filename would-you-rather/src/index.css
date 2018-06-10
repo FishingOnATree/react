@@ -10,11 +10,62 @@ a {
   color: #252525;
 }
 
-.container {
-  max-width: 1000px;
+.col-container {
+  display: table; /* Make the container element behave like a table */
+  width: 100%; /* Set full-width to expand the whole page */
+  margin :3px;
+}
+
+.col {
+  display: table-cell; /* Make elements inside the container behave like table cells */
+}
+
+.userpanel {
+  align: right;
+}
+
+.logon {
+  max-width: 800px;
   margin: 0 auto;
   padding: 10px;
 }
+
+.padding {
+  width: 40%;
+  margin: 30px;
+}
+
+.reset {
+  clear:both;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+.nav ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  text-decoration: none;
+}
+
+.nav li:first-child {
+  padding-left: 0;
+}
+
+ul {
+  padding-left: 0;
+}
+
+li {
+  list-style-type: none;
+  padding: 10px;
+  text-decoration: none;
+}
+
 
 .btn {
   text-transform: uppercase;
@@ -45,25 +96,4 @@ a {
 
 .active {
   font-weight: bold;
-}
-
-.nav ul {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  text-decoration: none;
-}
-
-.nav li:first-child {
-  padding-left: 0;
-}
-
-ul {
-  padding-left: 0;
-}
-
-li {
-  list-style-type: none;
-  padding: 10px;
-  text-decoration: none;
 }
