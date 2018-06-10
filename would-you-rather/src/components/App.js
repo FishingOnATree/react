@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux'
 
 import LoadingBar from 'react-redux-loading';
@@ -31,10 +31,15 @@ class App extends Component {
                     <div><a onClick={ () => dispatch(logout())}>Log out</a></div>
                   </div>
                   <Nav />
-                  <Route path='/' exact component={QuestionList} />
-                  <Route path='/question/:id' component={Question} />
-                  <Route path='/add' component={NewQuestion} />
-                  <Route path='/leaderboard' component={Leaderboard} />
+                  <Switch>
+                    <Route path='/' exact component={QuestionList} />
+                    <Route path='/question/:id' component={Question} />
+                    <Route path='/add' component={NewQuestion} />
+                    <Route path='/leaderboard' component={Leaderboard} />
+                    <Route path='*' render= {() =>(
+                      <h1>404 - Page not found</h1>
+                    )} />
+                    </Switch>
                 </div>
                 :
                 <div>
