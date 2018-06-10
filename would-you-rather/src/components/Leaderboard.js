@@ -14,8 +14,8 @@ class Leaderboard extends Component {
         <table>
           <thead>
             <tr>
-              <th>User</th>
               <th>Rank</th>
+              <th colspan="2">User</th>
               <th>Score</th>
             </tr>
           </thead>
@@ -23,8 +23,15 @@ class Leaderboard extends Component {
             { userIds.map((userId, index) => {
               return (
                 <tr key={userId}>
-                  <td>{users[userId].avatarURL} - {users[userId].name} </td>
                   <td>{index + 1}</td>
+                  <td>
+                    <img
+                      src={users[userId].avatarURL}
+                      alt={`Avatar of ${users[userId].name}`}
+                      className='avatar'
+                    />
+                  </td>
+                  <td className={userId === authedUser ? 'active':''}>{users[userId].name} </td>
                   <td>{score(users[userId])}</td>
                 </tr>
               )

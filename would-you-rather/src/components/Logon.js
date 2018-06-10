@@ -7,20 +7,25 @@ class Logon extends Component {
     const { userIds, users } = this.props;
     return (
       <div className='logon' >
-        <div>
-          <h3>Please log in</h3>
-          <ul>
-            { userIds.map((userId) => {
-                const user = users[userId];
-                return (
-                  <li key={user.id}>
-                    <a onClick={() => this.props.dispatch(login(user.id))}>{user.name}</a>
-                  </li>
-                )
-              })
-            }
-          </ul>
-        </div>
+        <h3>Please pick a login: </h3>
+        <ul>
+          { userIds.map((userId) => {
+              const user = users[userId];
+              return (
+                <li key={user.id}>
+                  <a onClick={() => this.props.dispatch(login(user.id))}>
+                    <img
+                      src={users[userId].avatarURL}
+                      alt={`Avatar of ${users[userId].name}`}
+                      className='avatar'
+                      title={user.name}
+                    />{user.name}
+                  </a>
+                </li>
+              )
+            })
+          }
+        </ul>
       </div>
     )
   }

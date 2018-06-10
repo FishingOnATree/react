@@ -10,24 +10,51 @@ a {
   color: #252525;
 }
 
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+.logout {
+  text-decoration: underline;
+  color: #252525;
+}
+
 .col-container {
   display: table; /* Make the container element behave like a table */
   width: 100%; /* Set full-width to expand the whole page */
-  margin :3px;
+  margin-top: 10px;
+  padding: 0px;
 }
 
 .col {
   display: table-cell; /* Make elements inside the container behave like table cells */
+  line-height: 1px;
 }
 
-.userpanel {
-  align: right;
+.col-left {
+  display: table-cell; /* Make elements inside the container behave like table cells */
+  width: 30%;
+  line-height: 1px;
+}
+
+.col-right {
+  display: table-cell; /* Make elements inside the container behave like table cells */
+  width: 70%;
+  text-align: right;
+  line-height: 1px;
 }
 
 .logon {
-  max-width: 800px;
-  margin: 0 auto;
+  max-width: 200px;
+  margin: 50px auto;
   padding: 10px;
+  text-align: left;
+  vertical-align: middle;
+  line-height: 10px;
+  border-style: groove;
+  border-color: black;
 }
 
 .padding {
@@ -35,14 +62,10 @@ a {
   margin: 30px;
 }
 
-.reset {
+.divider {
   clear:both;
-}
-
-.container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 10px;
+  border-top: 3px solid black;
+  margin-bottom: 10px;
 }
 
 .nav ul {
@@ -62,10 +85,16 @@ ul {
 
 li {
   list-style-type: none;
-  padding: 10px;
+  padding-right: 10px;
   text-decoration: none;
 }
 
+.avatar {
+  height: 30px;
+  weight: 30px;
+  border-radius: 25px;
+  margin: 0px;
+}
 
 .btn {
   text-transform: uppercase;
