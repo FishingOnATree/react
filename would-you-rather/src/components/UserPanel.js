@@ -9,12 +9,12 @@ class UserPanel extends Component {
     const { user, dispatch, history } = this.props;
     return (
       <Fragment>
-        Hi, {user.name}
+        Hi, {user.name}&nbsp;
         (<a className="logout"
           onClick={() => {
             dispatch(logout());
             history.push("/");
-          }}>Log out</a>)
+          }}>logout</a>)
       </Fragment>
     )
   }

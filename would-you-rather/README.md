@@ -15,6 +15,7 @@ The project follows the same folder structures as demonstrated during the React 
 
 To run the code:
 
+      npm install
       npm start
 
 ## Data

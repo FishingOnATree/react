@@ -16,7 +16,7 @@ class App extends Component {
     this.props.dispatch(load_data())
   }
   render() {
-    const { authedUser, users, dispatch } = this.props;
+    const { authedUser } = this.props;
     return (
       <Router>
         <Fragment>
@@ -51,10 +51,9 @@ class App extends Component {
   }
 }
 
-function mapStateToProps ({ authedUser, users }) {
+function mapStateToProps ({ authedUser }) {
   return {
-    authedUser,
-    users
+    authedUser
   }
 }
 
