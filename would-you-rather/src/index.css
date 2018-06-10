@@ -1,0 +1,155 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  color: #252525;
+}
+
+a {
+  text-decoration: none;
+  color: #252525;
+}
+
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+.logout {
+  text-decoration: underline;
+  color: #252525;
+}
+
+.link {
+  text-decoration: underline;
+  color: 	#0645AD;
+}
+
+.col-container {
+  display: table; /* Make the container element behave like a table */
+  width: 100%; /* Set full-width to expand the whole page */
+  margin-top: 10px;
+  padding: 0px;
+}
+
+.col {
+  display: table-cell; /* Make elements inside the container behave like table cells */
+  line-height: 1px;
+}
+
+.col-left {
+  display: table-cell; /* Make elements inside the container behave like table cells */
+  width: 30%;
+  line-height: 1px;
+}
+
+.col-right {
+  display: table-cell; /* Make elements inside the container behave like table cells */
+  width: 70%;
+  text-align: right;
+  line-height: 1px;
+}
+
+.logon {
+  max-width: 200px;
+  margin: 50px auto;
+  padding: 10px;
+  text-align: left;
+  vertical-align: middle;
+  line-height: 10px;
+  border-style: groove;
+  border-color: black;
+}
+
+.padding {
+  width: 40%;
+  margin: 30px;
+}
+
+.divider {
+  clear:both;
+  border-top: 3px solid black;
+  margin-bottom: 10px;
+}
+
+.nav ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  text-decoration: none;
+}
+
+.nav li:first-child {
+  padding-left: 0;
+}
+
+ul {
+  padding-left: 0;
+}
+
+li {
+  list-style-type: none;
+  padding-right: 10px;
+  text-decoration: none;
+}
+
+.avatar {
+  height: 30px;
+  weight: 30px;
+  border-radius: 25px;
+  margin: 0px;
+}
+
+.leaderboard {
+  margin: 5px;
+  padding: 2px;
+  border-spacing: 15px;
+  text-align: center;
+}
+
+.questionboard {
+  margin-top: 40px;
+  padding-right: 2px;
+  border-spacing: 5px;
+  text-align: left;
+}
+
+.btn {
+  text-transform: uppercase;
+  margin: 35px auto;
+  padding: 10px;
+  border: 1px solid rgba(0,0,0,.29);
+  cursor: pointer;
+  background: #fff;
+  font-size: 12px;
+  width: 100px;
+  position: relative;
+}
+
+.btn:hover {
+  border-color: rgba(0,0,0,.5);
+  text-decoration: none;
+}
+
+.btn:focus {
+  outline: 0;
+  font-weight: 700;
+  border-width: 2px;
+}
+
+.active {
+  font-weight: bold;
+}
+
+.textarea {
+  border-radius: 4px;
+  border: 1px solid #dad7d7;
+  padding: 10px;
+  font-size: 15px;
+  height: 100px;
+}
+
+.smallfont {
+  font-size: 10px;
+}
