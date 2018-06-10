@@ -32,7 +32,7 @@ class NewQuestion extends Component {
     const { optionOneText, optionTwoText, feedback } = this.state
     return (
       <div className='contents'>
-        <h3>New question: Would you rather</h3>
+        <h3>Would You Rather</h3>
         <form className='' onSubmit={this.handleSubmit}>
           <textarea
             placeholder="optinOne"

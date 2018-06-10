@@ -14,7 +14,7 @@ class Question extends Component {
     if (id in questions) {
       return (
         <div>
-          <h3>Would you rather - {id} - { answered ? "Answered" : "Not answered"}</h3>
+          <h3>Would You Rather - {id} - { answered ? "Answered" : "Not answered"}</h3>
           <div>
             { answered ? (
                 <ul>
