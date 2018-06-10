@@ -10,10 +10,12 @@ The project follows the same folder structures as demonstrated during the React 
 * Nav.js - Top navigation panel
 * NewQuestion.js - the form to submit a new question.
 * Question.js - Show the details of one question (either view or answer the poll)
-* QuestionList.js - Show a list of questions categorized by "Answered" vs "Unanswered". Initial selection is "Unanswered", but the choice is memorized as default (if implemented with a real backend). 
+* QuestionList.js - Show a list of questions categorized by "Answered" vs "Unanswered". Initial selection is "Unanswered", but the choice is memorized as default (if implemented with a real backend).
+* UserPanel.js - Display the login user and give the user ability to logout.
 
 To run the code:
 
+      npm install
       npm start
 
 ## Data
