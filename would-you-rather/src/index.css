@@ -104,7 +104,15 @@ li {
 .leaderboard {
   margin: 5px;
   padding: 2px;
+  border-spacing: 15px;
   text-align: center;
+}
+
+.questionboard {
+  margin-top: 40px;
+  padding-right: 2px;
+  border-spacing: 5px;
+  text-align: left;
 }
 
 .btn {
@@ -130,7 +138,6 @@ li {
   border-width: 2px;
 }
 
-
 .active {
   font-weight: bold;
 }
@@ -141,4 +148,8 @@ li {
   padding: 10px;
   font-size: 15px;
   height: 100px;
+}
+
+.smallfont {
+  font-size: 10px;
 }

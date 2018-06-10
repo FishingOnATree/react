@@ -3,11 +3,7 @@ import { connect } from 'react-redux';
 
 class Leaderboard extends Component {
   render () {
-    console.log("Leaderboard")
-    console.log(this.props)
     const { authedUser, users, userIds } = this.props;
-    console.log(userIds)
-    console.log(users)
     return (
       <div className='contents'>
         <h3>Leaderboard</h3>

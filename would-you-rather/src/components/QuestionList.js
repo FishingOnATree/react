@@ -13,42 +13,52 @@ class QuestionList extends Component {
   }
 
   render () {
-    console.log(this.props);
-    const { user, questions, questionIds, viewAnswered } = this.props;
+    const { user, users, questions, questionIds, viewAnswered } = this.props;
     return (
       <div className='contents'>
         <h2>Question List</h2>
         <div>
-          <a className={viewAnswered ? '':'active'}
+          <a className={viewAnswered ? 'link':'active'}
             onClick={() => this.updateViewAnsweredChoice(false)}>View Unanswered</a>
           &nbsp;&nbsp;|&nbsp;&nbsp;
-          <a className={viewAnswered ? 'active':''}
+          <a className={viewAnswered ? 'active':'link'}
             onClick={() => this.updateViewAnsweredChoice(true)}>View Answered</a>
         </div>
-        <ul>
+        <table className='questionboard'>
+          <thead>
+            <tr>
+              <th>Time added</th>
+              <th>Question</th>
+              <th>Author</th>
+            </tr>
+          </thead>
+          <tbody>
           { questionIds.filter((id) => (id in user.answers === viewAnswered))
               .map((id) => {
                 const question = questions[id]
                 return (
-                  <li key={id}>
-                    <Link  to={`/question/${id}`}>
-                      {id} - {formatDate(question.timestamp)}
-                    </Link>
-                  </li>
+                  <tr key={id}>
+                    <td>{formatDate(question.timestamp)}</td>
+                    <td>
+                      <Link className="link" to={`/question/${id}`}>{id}</Link>
+                    </td>
+                    <td>{users[question.author].name}</td>
+                  </tr>
                 )
               })
           }
-        </ul>
+          </tbody>
+        </table>
       </div>
     )
   }
 }
 
 function mapStateToProps({ authedUser, users, questions, viewAnswered }) {
-  console.log("mapStateToProps")
   const user = users[authedUser];
   return {
     user,
+    users,
     questions,
     questionIds: Object.keys(questions)
       .sort((a,b) => questions[b].timestamp - questions[a].timestamp),

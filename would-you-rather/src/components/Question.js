@@ -22,7 +22,7 @@ class Question extends Component {
     if (id in questions) {
       return (
         <div>
-          <h2>Would You Rather - {id} - { answered ? "Answered" : "Not answered"}</h2>
+          <h2>Would You Rather</h2>
           <div>
             { answered ? (
                 <ul>
@@ -47,6 +47,7 @@ class Question extends Component {
               )
             }
           </div>
+          <span className="smallfont">(id: {id})</span>
         </div>
       )
     } else {

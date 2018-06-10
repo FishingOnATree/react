@@ -1,10 +1,20 @@
 # Would You Rather Project
 
-This is the starter code for the final assessment project for Udacity's React & Redux course.
+This is the project for Udacity's React & Redux course.
 
-The `_DATA.js` file represents a fake database and methods that let you access the data. The only thing you need to edit in the ` _DATA.js` file is the value of `avatarURL`. Each user should have an avatar, so you’ll need to add the path to each user’s avatar.
+The project follows the same folder structures as demonstrated during the React & Redux class, so everything should be simple to follow. The components included are:
 
-Using the provided starter code, you'll build a React/Redux front end for the application. We recommend using the [Create React App](https://github.com/facebook/create-react-app) to bootstrap the project.
+* App.js - main application
+* Leaderboard.js - Leaderboard page
+* Logon.js - Logon page
+* Nav.js - Top navigation panel
+* NewQuestion.js - the form to submit a new question.
+* Question.js - Show the details of one question (either view or answer the poll)
+* QuestionList.js - Show a list of questions categorized by "Answered" vs "Unanswered". Initial selection is "Unanswered", but the choice is memorized as default (if implemented with a real backend). 
+
+To run the code:
+
+      npm start
 
 ## Data
 
