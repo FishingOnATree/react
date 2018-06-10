@@ -24,7 +24,7 @@ class NewQuestion extends Component {
     this.setState(() => ({
       optionOneText: '',
       optionTwoText: '',
-      feedback: "Last question added"
+      feedback: "New question added successfully."
     }))
   }
 
@@ -32,30 +32,43 @@ class NewQuestion extends Component {
     const { optionOneText, optionTwoText, feedback } = this.state
     return (
       <div className='contents'>
-        <h3>Would You Rather</h3>
-        <form className='' onSubmit={this.handleSubmit}>
-          <textarea
-            placeholder="optinOne"
-            value={optionOneText}
-            onChange={(e) => this.handleChange(e, "optionOneText")}
-            className='textarea'
-            maxLength={160}
-          />
-          <textarea
-            placeholder="optinTwo"
-            value={optionTwoText}
-            onChange={(e) => this.handleChange(e, "optionTwoText")}
-            className='textarea'
-            maxLength={160}
-          />
-          <br />
-          <button
-            className='btn'
-            type='submit'
-            disabled={optionOneText === '' || optionTwoText === ''}>
-              Submit
-          </button>
-        </form>
+        <h2>Would You Rather</h2>
+        {feedback ?
+          (
+            <div>
+              <span>{feedback}</span>&nbsp;
+              <a className="link" onClick={() => this.setState(() => ({
+                optionOneText: '',
+                optionTwoText: '',
+                feedback: ''
+              }))}>Add more</a>
+            </div>
+          ) : (
+            <form onSubmit={this.handleSubmit}>
+              <textarea
+                placeholder="optinOne"
+                value={optionOneText}
+                onChange={(e) => this.handleChange(e, "optionOneText")}
+                className='textarea'
+                maxLength={160}
+              />
+              <textarea
+                placeholder="optinTwo"
+                value={optionTwoText}
+                onChange={(e) => this.handleChange(e, "optionTwoText")}
+                className='textarea'
+                maxLength={160}
+              />
+              <br />
+              <button
+                className='btn'
+                type='submit'
+                disabled={optionOneText === '' || optionTwoText === '' || optionOneText === optionTwoText}>
+                  Submit
+              </button>
+            </form>
+          )
+        }
       </div>
     )
   }

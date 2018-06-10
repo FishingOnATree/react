@@ -17,10 +17,11 @@ class QuestionList extends Component {
     const { user, questions, questionIds, viewAnswered } = this.props;
     return (
       <div className='contents'>
-        <h3>QuestionList - {viewAnswered ? "Answered" : "Unanswered"}</h3>
+        <h2>Question List</h2>
         <div>
           <a className={viewAnswered ? '':'active'}
-            onClick={() => this.updateViewAnsweredChoice(false)}>View Unanswered</a> |
+            onClick={() => this.updateViewAnsweredChoice(false)}>View Unanswered</a>
+          &nbsp;&nbsp;|&nbsp;&nbsp;
           <a className={viewAnswered ? 'active':''}
             onClick={() => this.updateViewAnsweredChoice(true)}>View Answered</a>
         </div>

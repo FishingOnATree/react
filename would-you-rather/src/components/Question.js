@@ -8,32 +8,40 @@ class Question extends Component {
     this.props.dispatch(handleAnswerQuestion(this.props.authedUser, this.props.id, option));
   }
 
+  calculatePercent = (num, denom) => {
+    return Math.floor((num / denom) * 100)
+  }
+
   render() {
     const { id, authedUser, users, questions } = this.props;
     const answered = id in users[authedUser].answers;
+    const question = questions[id];
+    const oneVotes = question.optionOne.votes.length;
+    const twoVotes = question.optionTwo.votes.length;
+    const totalVotes = oneVotes + twoVotes;
     if (id in questions) {
       return (
         <div>
-          <h3>Would You Rather - {id} - { answered ? "Answered" : "Not answered"}</h3>
+          <h2>Would You Rather - {id} - { answered ? "Answered" : "Not answered"}</h2>
           <div>
             { answered ? (
                 <ul>
                   <li>
-                    {questions[id].optionOne.text} - {questions[id].optionOne.votes.length} votes
-                    {questions[id].optionOne.votes.indexOf(authedUser) >= 0 ? " including you":""}
+                    {question.optionOne.text}: {this.calculatePercent(oneVotes, totalVotes)}% - {oneVotes} votes
+                    {question.optionOne.votes.indexOf(authedUser) >= 0 ? " (including you)":""}
                   </li>
                   <li>
-                    {questions[id].optionTwo.text} - {questions[id].optionTwo.votes.length} votes
-                    {questions[id].optionTwo.votes.indexOf(authedUser) >= 0 ? " including you":""}
+                    {question.optionTwo.text}: {this.calculatePercent(twoVotes, totalVotes)}% - {twoVotes} votes
+                    {question.optionTwo.votes.indexOf(authedUser) >= 0 ? " (including you)":""}
                   </li>
                 </ul>
               ) : (
                 <ul>
                   <li>
-                    Pick <a onClick={() => this.answer("optionOne")}>{questions[id].optionOne.text}</a>
+                    <a className="link" onClick={() => this.answer("optionOne")}>{question.optionOne.text}</a>
                   </li>
                   <li>
-                    Pick <a onClick={() => this.answer("optionTwo")}>{questions[id].optionTwo.text}</a>
+                    <a className="link" onClick={() => this.answer("optionTwo")}>{question.optionTwo.text}</a>
                   </li>
                 </ul>
               )

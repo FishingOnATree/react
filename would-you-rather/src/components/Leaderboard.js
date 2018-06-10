@@ -11,7 +11,7 @@ class Leaderboard extends Component {
     return (
       <div className='contents'>
         <h3>Leaderboard</h3>
-        <table>
+        <table className='leaderboard'>
           <thead>
             <tr>
               <th>Rank</th>
