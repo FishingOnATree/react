@@ -37,6 +37,9 @@ class App extends Component {
                 <Route path='/question/:id' component={Question} />
                 <Route path='/add' component={NewQuestion} />
                 <Route path='/leaderboard' component={Leaderboard} />
+                <Route path='*' render= {() =>(
+                  <h1>Page not found</h1>
+                )} />
               </Switch>
             </div>
             :
