@@ -5,6 +5,7 @@ This is the project for Udacity's React & Redux course.
 The project follows the same folder structures as demonstrated during the React & Redux class, so everything should be simple to follow. The components included are:
 
 * App.js - main application
+* Avatar.js - general html for avatar + name
 * Leaderboard.js - Leaderboard page
 * Logon.js - Logon page
 * Nav.js - Top navigation panel

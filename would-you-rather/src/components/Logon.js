@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { login } from '../actions/AuthedUser'
+import avatar from './Avatar'
+
 class Logon extends Component {
 
   render() {
-    const { userIds, users } = this.props;
+    const { userIds, users, dispatch } = this.props;
     return (
       <div className='logon' >
         <h3>Please pick a login: </h3>
@@ -13,13 +15,8 @@ class Logon extends Component {
               const user = users[userId];
               return (
                 <li key={user.id}>
-                  <a onClick={() => this.props.dispatch(login(user.id))}>
-                    <img
-                      src={users[userId].avatarURL}
-                      alt={`Avatar of ${users[userId].name}`}
-                      className='avatar'
-                      title={user.name}
-                    />{user.name}
+                  <a onClick={() => dispatch(login(user.id))}>
+                    {avatar(user)}
                   </a>
                 </li>
               )
@@ -31,10 +28,11 @@ class Logon extends Component {
   }
 }
 
-function mapStateToProps( { users } ){
+function mapStateToProps( { users, dispatch } ){
   return {
     userIds: Object.keys(users).sort((a, b) => a["name"] > b["name"]),
-    users
+    users,
+    dispatch
   };
 }
 
