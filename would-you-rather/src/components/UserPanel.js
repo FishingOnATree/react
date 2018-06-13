@@ -1,29 +1,46 @@
-import React, { Component, Fragment } from 'react';
+import React, { Fragment } from 'react';
 import { logout } from '../actions/AuthedUser'
 import { withRouter } from "react-router-dom";
 import { connect } from 'react-redux'
 
-class UserPanel extends Component {
+// class UserPanel extends Component {
+//
+//   render() {
+//     console.log("logout")
+//     console.log(this.props)
+//     const { user, dispatch, history } = this.props;
+//     return (
+//       <Fragment>
+//         Hi, {user.name}
+//         (<a className="logout"
+//           onClick={() => {
+//             dispatch(logout());
+//             history.push("/");
+//           }}>logout</a>)
+//       </Fragment>
+//     )
+//   }
+// }
 
-  render() {
-    const { user, dispatch, history } = this.props;
-    return (
-      <Fragment>
-        Hi, {user.name}&nbsp;
-        (<a className="logout"
-          onClick={() => {
-            dispatch(logout());
-            history.push("/");
-          }}>logout</a>)
-      </Fragment>
-    )
-  }
+const UserPanel = ({ user, dispatch, history }) => {
+  return (
+    <Fragment>
+      Hi, {user.name}
+      (<a className="logout"
+        onClick={() => {
+          dispatch(logout());
+          history.push("/");
+        }}>logout</a>)
+    </Fragment>
+  )
 }
 
-function mapStateToProps({ authedUser, users}) {
+function mapStateToProps({ authedUser, users, dispatch }, {history}) {
   const user = users[authedUser];
   return {
-    user
+    user,
+    dispatch,
+    history
   }
 }
 

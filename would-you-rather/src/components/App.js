@@ -7,6 +7,7 @@ import Logon from './Logon';
 import Leaderboard from './Leaderboard';
 import Nav from './Nav';
 import NewQuestion from './NewQuestion';
+import PageNotFound from './PageNotFound';
 import Question from './Question';
 import QuestionList from './QuestionList';
 import UserPanel from './UserPanel';
@@ -37,6 +38,7 @@ class App extends Component {
                 <Route path='/question/:id' component={Question} />
                 <Route path='/add' component={NewQuestion} />
                 <Route path='/leaderboard' component={Leaderboard} />
+                <Route path='/404' component={PageNotFound} />
                 <Route path='*' render= {() =>(
                   <h1>Page not found</h1>
                 )} />
@@ -51,9 +53,10 @@ class App extends Component {
   }
 }
 
-function mapStateToProps ({ authedUser }) {
+function mapStateToProps ({ authedUser, dispatch }) {
   return {
-    authedUser
+    authedUser,
+    dispatch
   }
 }
 

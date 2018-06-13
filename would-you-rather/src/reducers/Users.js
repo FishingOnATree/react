@@ -1,8 +1,6 @@
 import { RECEIVE_USERS, ADD_ANSWER, WRITE_QUESTION } from '../actions/Users'
 
 export default function users(state = {}, action) {
-  let users = null;
-  let user = null;
   switch (action.type) {
     case RECEIVE_USERS:
       return {
@@ -10,19 +8,30 @@ export default function users(state = {}, action) {
         ...action.users
       };
     case ADD_ANSWER:
-      users = Object.assign({}, state);
-      user = users[action.authedUser];
-      user.answers[action.questionId] = action.option;
+      // users = Object.assign({}, state);
+      // user = users[action.authedUser];
+      // user.answers[action.questionId] = action.option;
       return {
-        ...users
+        ...state,
+        [action.authedUser]: {
+          ...state[action.authedUser],
+          answers: {
+              ...state[action.authedUser].answers,
+              [action.questionId]: action.option
+          }
+        }
       };
     case WRITE_QUESTION:
-      users = Object.assign({}, state);
-      user = users[action.authedUser];
-      user.questions = user.questions.concat(action.questionId)
+      // users = Object.assign({}, state);
+      // user = users[action.authedUser];
+      // user.questions = user.questions.concat(action.questionId)
       return {
-        ...users
-      };
+        ...state,
+        [action.authedUser]: {
+            ...state[action.authedUser],
+           questions: [...state[action.authedUser].questions, action.questionId],
+        },
+     };
     default:
       return state;
   }

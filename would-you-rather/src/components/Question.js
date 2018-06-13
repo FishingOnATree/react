@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux';
 import { handleAnswerQuestion } from '../actions/shared'
+import avatar from './Avatar'
 
 class Question extends Component {
   answer = (option) => {
@@ -14,15 +15,17 @@ class Question extends Component {
 
   render() {
     const { id, authedUser, users, questions } = this.props;
-    const answered = id in users[authedUser].answers;
-    const question = questions[id];
-    const oneVotes = question.optionOne.votes.length;
-    const twoVotes = question.optionTwo.votes.length;
-    const totalVotes = oneVotes + twoVotes;
     if (id in questions) {
+      const answered = id in users[authedUser].answers;
+      const question = questions[id];
+      const oneVotes = question.optionOne.votes.length;
+      const twoVotes = question.optionTwo.votes.length;
+      const totalVotes = oneVotes + twoVotes;
+      const author = users[question.author];
       return (
         <div>
           <h2>Would You Rather</h2>
+          <div>Created by {avatar(author)}</div>
           <div>
             { answered ? (
                 <ul>
@@ -59,13 +62,14 @@ class Question extends Component {
 }
 
 
-function mapStateToProps ({ authedUser, users, questions }, props) {
+function mapStateToProps ({ authedUser, users, questions, dispatch }, props) {
   const { id } = props.match.params
   return {
     id,
     authedUser,
     users,
-    questions
+    questions,
+    dispatch
   };
 }
 

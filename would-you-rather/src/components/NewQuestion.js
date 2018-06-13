@@ -10,10 +10,9 @@ class NewQuestion extends Component {
   }
 
   handleChange = (e, option) => {
-    const text = e.target.value
-    this.setState(() => ({
-      [option]: text
-    }))
+    this.setState({
+      [option]: e.target.value
+    })
   }
 
   handleSubmit = (e) => {
@@ -21,11 +20,19 @@ class NewQuestion extends Component {
     const { optionOneText, optionTwoText } = this.state
     const { dispatch, authedUser } = this.props
     dispatch(handleAddQuestion(optionOneText, optionTwoText, authedUser))
-    this.setState(() => ({
+    this.setState({
       optionOneText: '',
       optionTwoText: '',
       feedback: "New question added successfully."
-    }))
+    })
+  }
+
+  reset = () => {
+    this.setState({
+      optionOneText: '',
+      optionTwoText: '',
+      feedback: ''
+    })
   }
 
   render () {
@@ -37,11 +44,7 @@ class NewQuestion extends Component {
           (
             <div>
               <span>{feedback}</span>&nbsp;
-              <a className="link" onClick={() => this.setState(() => ({
-                optionOneText: '',
-                optionTwoText: '',
-                feedback: ''
-              }))}>Add more</a>
+              <a className="link" onClick={this.reset()}>Add more</a>
             </div>
           ) : (
             <form onSubmit={this.handleSubmit}>
@@ -74,9 +77,10 @@ class NewQuestion extends Component {
   }
 }
 
-function mapStateToProps({ authedUser }) {
+function mapStateToProps({ authedUser, dispatch }) {
   return {
-    authedUser
+    authedUser,
+    dispatch
   }
 }
 export default connect(mapStateToProps)(NewQuestion);
