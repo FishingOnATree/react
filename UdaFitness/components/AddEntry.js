@@ -4,6 +4,8 @@ import { getMetricMetaInfo, timeToString } from '../utils/helpers'
 import UdaciStepper from './UdaciStepper'
 import UdaciSlider from './UdaciSlider'
 import DateHeader from './DateHeader'
+import { Ionicons } from '@expo/vector-icons'
+import TextButton from './TextButton'
 
 function SubmitBtn({ onPress }) {
   return (
@@ -66,32 +68,56 @@ export default class AddEntry extends Component {
     //clear loca
   }
 
+  reset = () => {
+    const key = timeToString()
+    //update redux
+    //nav to home
+    //save to DB
+    //clear loca
+  }
+
   render() {
     const metaInfo = getMetricMetaInfo()
-    return (
-      <View>
-        <DateHeader date={(new Date()).toLocaleDateString()}/>
-        {Object.keys(metaInfo).map((key) => {
-          const { getIcon, type, max, step, unit, ...rest } = metaInfo[key]
-          const value = this.state[key]
-          return (
-            <View key={key}>
-              {getIcon()}
-              {type == 'slider' ?
-                <UdaciSlider max={max} step={step} unit={unit} value={value}
-                  onChange={(value) => this.slide(key, value)}
-                />
-                :
-                <UdaciStepper max={max} unit={unit} value={value}
-                  onIncrement={() => this.increment(key)}
-                  onDecrement={() => this.decrement(key)}
-                />
-              }
-            </View>
-          )
-        })}
-        <SubmitBtn onPress={this.submit}/>
-      </View>
-    )
+
+    if (this.props.alreadyLogged) {
+      return (
+        <View>
+          <Ionicons
+            name={'ios-happy-outline'}
+            size={100}
+          />
+          <Text>You already logged your information for today.</Text>
+          <TextButton onPress={this.reset}>
+            Reset
+          </TextButton>
+        </View>
+      )
+    } else {
+      return (
+        <View>
+          <DateHeader date={(new Date()).toLocaleDateString()}/>
+          {Object.keys(metaInfo).map((key) => {
+            const { getIcon, type, max, step, unit, ...rest } = metaInfo[key]
+            const value = this.state[key]
+            return (
+              <View key={key}>
+                {getIcon()}
+                {type == 'slider' ?
+                  <UdaciSlider max={max} step={step} unit={unit} value={value}
+                    onChange={(value) => this.slide(key, value)}
+                  />
+                  :
+                  <UdaciStepper max={max} unit={unit} value={value}
+                    onIncrement={() => this.increment(key)}
+                    onDecrement={() => this.decrement(key)}
+                  />
+                }
+              </View>
+            )
+          })}
+          <SubmitBtn onPress={this.submit}/>
+        </View>
+      )      
+    }
   }
 }
