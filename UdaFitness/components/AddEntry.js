@@ -6,6 +6,7 @@ import UdaciSlider from './UdaciSlider'
 import DateHeader from './DateHeader'
 import { Ionicons } from '@expo/vector-icons'
 import TextButton from './TextButton'
+import { submitEntry, removeEntry } from '../utils/api'
 
 function SubmitBtn({ onPress }) {
   return (
@@ -65,6 +66,7 @@ export default class AddEntry extends Component {
     })
     //nav to home
     //save to DB
+    submitEntry({key, entry})
     //clear loca
   }
 
@@ -73,6 +75,7 @@ export default class AddEntry extends Component {
     //update redux
     //nav to home
     //save to DB
+    removeEntry(key)
     //clear loca
   }
 
@@ -117,7 +120,7 @@ export default class AddEntry extends Component {
           })}
           <SubmitBtn onPress={this.submit}/>
         </View>
-      )      
+      )
     }
   }
 }
