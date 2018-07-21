@@ -51,8 +51,22 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
   },
+  warning: {
+    color: red,
+  },
   cards:{
     color: blue
+  },
+  subtitle: {
+    fontSize: 18,
+    marginBottom: 5,
+  },
+  input_ios: {
+    height: 60,
+    width: 300,
+    fontSize: 18,
+    marginBottom: 20,
+    borderBottomWidth: 1,
   },
 })
 

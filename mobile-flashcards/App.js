@@ -6,6 +6,7 @@ import { Provider } from 'react-redux'
 import reducer from './reducers'
 import { createBottomTabNavigator, createStackNavigator } from 'react-navigation'
 import { FontAwesome, Ionicons } from '@expo/vector-icons'
+import AddCard from './components/AddCard'
 import AddDeck from './components/AddDeck'
 import ListDeck from './components/ListDeck'
 import ShowDeck from './components/ShowDeck'
@@ -59,6 +60,12 @@ const MainNavigator = createStackNavigator(
       screen: ShowDeck,
       navigationOptions: {
         title: 'Deck View'
+      }
+    },
+    AddCard: {
+      screen: AddCard,
+      navigationOptions: {
+        title: 'Add Quiz'
       }
     }
   }, {

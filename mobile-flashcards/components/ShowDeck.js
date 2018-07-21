@@ -11,10 +11,10 @@ class ShowDeck extends Component {
     const { title } = this.props.navigation.state.params
     const deck = this.props.decks[title]
     return (
-      <View style={styles.container}>
+      <View>
         <Text style={styles.title}>{deck.title}</Text>
         <Text style={styles.cards}>{deck.questions.length} {deck.questions.length>1 ? 'quizzes':'quiz'}</Text>
-        <TextButton /*onPress={() => navigate('AddQuiz', { deck })}*/ >
+        <TextButton onPress={() => navigate('AddCard', { deck })} >
           Add Quiz
         </TextButton>
         <TextButton
@@ -26,9 +26,11 @@ class ShowDeck extends Component {
   }
 }
 
-function mapStateToProps(decks) {
+function mapStateToProps(decks, {dispatch, navigation}) {
   return {
-    decks
+    decks,
+    dispatch,
+    navigation
   }
 }
 

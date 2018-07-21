@@ -4,8 +4,7 @@ export const ADD_CARD = 'ADD_CARD'
 export const ADD_DECK = 'ADD_DECK'
 export const LOAD_DECKS = 'LOAD_DECKS'
 
-export function addCard(title, question, answer) {
-  const card = makeCard(question, answer)
+export function addCard(title, card) {
   return {
     type: ADD_CARD,
     title,

@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { addDeck } from '../actions'
 import TextButton from './TextButton'
 import styles from '../styles'
-
+import { saveDeckTitle } from '../utils/api'
 
 class AddDeck extends Component {
   state = {
@@ -13,7 +13,7 @@ class AddDeck extends Component {
     warning: ''
   }
 
-  getState(title, warning) {
+  makeState(title, warning) {
     return {title, warning}
   }
 
@@ -21,12 +21,12 @@ class AddDeck extends Component {
     let { title } = this.state
     title = title.trim().toUpperCase()
     if (title) {
-      this.props.dispatch(addDeck(title))
-      this.setState(this.getState('', 'Title saved'))
-      // navigate to DeckList and call API to AsyncStorage
-      //this.props.navigation.navigate('DeckDetail', { deckTitle: text })
+      saveDeckTitle(title).then(() => {
+        this.setState(this.makeState('', 'Title saved'))
+        this.props.dispatch(addDeck(title))
+      })
     } else {
-      this.setState(this.getState('', 'Invalid title'))
+      this.setState(this.makeState('', 'Invalid title'))
     }
   }
 
@@ -39,9 +39,9 @@ class AddDeck extends Component {
           style={ styles.input }
           placeholder="Deck Title"
           value={this.state.title}
-          onChangeText={(title) => this.setState(this.getState(title, ''))}
+          onChangeText={(title) => this.setState(this.makeState(title, ''))}
         />
-        <Text>{this.state.warning}</Text>
+        <Text style={style.warning}>{this.state.warning}</Text>
         <TextButton onPress={() => this.submit()}>
           Submit
         </TextButton>

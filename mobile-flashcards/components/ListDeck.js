@@ -38,10 +38,11 @@ class ListDeck extends Component {
   }
 }
 
-function mapStateToProps(decks) {
-  console.log(decks);
+function mapStateToProps(decks, {dispatch, navigation}) {
   return {
-    decks
+    decks,
+    dispatch,
+    navigation
   }
 }
 

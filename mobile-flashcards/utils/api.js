@@ -61,8 +61,8 @@ export function saveDeckTitle(title) {
 }
 
 export function addCardToDeck(title, card) {
-  getDeck(title).then((result) => {
-      let questions = resul.questions
+  return getDeck(title).then((result) => {
+      let questions = result.questions
       questions.push(card)
       let deck = JSON.stringify({ [title]: { title: [title], questions} })
       return AsyncStorage.mergeItem(FLASHCARD_STORAGE_KEY, deck)
