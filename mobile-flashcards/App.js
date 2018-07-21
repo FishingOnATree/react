@@ -5,6 +5,7 @@ import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import { purple } from './utils/colors'
 import reducer from './reducers'
+import AddDeck from './components/AddDeck'
 
 function UdaciStatusBar ({backgroundColor, ...props}) {
   return (
@@ -20,9 +21,7 @@ export default class App extends React.Component {
       <Provider store={createStore(reducer)}>
         <View style={styles.container}>
           <UdaciStatusBar backgroundColor={purple} barStyle="light-content" />
-          <Text>Open up App.js to start working on your app!</Text>
-          <Text>Changes you make will automatically reload.</Text>
-          <Text>Shake your phone to open the developer menu. !!! </Text>
+          <AddDeck />
         </View>
       </Provider>
     );
