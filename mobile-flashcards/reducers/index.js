@@ -1,4 +1,4 @@
-import { ADD_CARD, ADD_DECK, GET_DECKS } from '../actions'
+import { ADD_CARD, ADD_DECK, LOAD_DECKS } from '../actions'
 import { saveDeckTitle } from '../utils/api'
 
 function reducer(state={}, action) {
@@ -23,7 +23,7 @@ function reducer(state={}, action) {
         ...{ [title]: { title: title, questions: []} }
       }
     }
-    case GET_DECKS: {
+    case LOAD_DECKS: {
       const { decks } = action
       return {
         ...decks

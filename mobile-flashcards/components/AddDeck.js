@@ -11,7 +11,7 @@ import { NavigationActions } from 'react-navigation'
 import { connect } from 'react-redux'
 import { addDeck } from '../actions'
 import TextButton from './TextButton'
-import { white } from '../utils/colors'
+import styles from '../styles'
 
 
 class AddDeck extends Component {
@@ -56,31 +56,6 @@ class AddDeck extends Component {
     )
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: white,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  headingTitle: {
-    fontSize: 30,
-    marginLeft: 15,
-    marginRight: 15,
-    marginBottom: 15,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  input: {
-    height: 40,
-    fontSize: 20,
-    marginLeft: 15,
-    marginRight: 15,
-    marginBottom: 15,
-    alignSelf: 'stretch',
-  }
-})
 
 function mapStateToProps({dispatch}) {
   return {

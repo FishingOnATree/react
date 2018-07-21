@@ -2,7 +2,7 @@ import { makeCard } from '../utils/api'
 
 export const ADD_CARD = 'ADD_CARD'
 export const ADD_DECK = 'ADD_DECK'
-export const GET_DECKS = 'GET_DECKS'
+export const LOAD_DECKS = 'LOAD_DECKS'
 
 export function addCard(title, question, answer) {
   const card = makeCard(question, answer)
@@ -20,9 +20,9 @@ export function addDeck(title) {
   }
 }
 
-export function getDecks(decks) {
+export function loadDecks(decks) {
   return {
-    type: GET_DECKS,
+    type: LOAD_DECKS,
     decks,
   }
 }

@@ -1,11 +1,14 @@
 import React from 'react';
-import { StyleSheet, Text, View, StatusBar } from 'react-native';
+import { Text, View, StatusBar } from 'react-native';
 import { Constants } from 'expo'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import { purple } from './utils/colors'
 import reducer from './reducers'
 import AddDeck from './components/AddDeck'
+import ListDeck from './components/ListDeck'
+import styles from './styles'
+
 
 function UdaciStatusBar ({backgroundColor, ...props}) {
   return (
@@ -21,18 +24,9 @@ export default class App extends React.Component {
       <Provider store={createStore(reducer)}>
         <View style={styles.container}>
           <UdaciStatusBar backgroundColor={purple} barStyle="light-content" />
-          <AddDeck />
+          <ListDeck />
         </View>
       </Provider>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
