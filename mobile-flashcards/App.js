@@ -3,12 +3,66 @@ import { Text, View, StatusBar } from 'react-native';
 import { Constants } from 'expo'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
-import { purple } from './utils/colors'
 import reducer from './reducers'
+import { createBottomTabNavigator, createStackNavigator } from 'react-navigation'
+import { FontAwesome, Ionicons } from '@expo/vector-icons'
 import AddDeck from './components/AddDeck'
 import ListDeck from './components/ListDeck'
-import styles from './styles'
+import ShowDeck from './components/ShowDeck'
+import styles, { purple, white } from './styles'
 
+
+const Tabs = createBottomTabNavigator( {
+  ListDeck: {
+    screen: ListDeck,
+    navigationOptions: {
+      tabBarLabel: 'List',
+      tabBarIcon: ({ tintColor }) => <Ionicons name='ios-bookmarks' size={30} color={tintColor} />
+    }
+  },
+  AddDeck: {
+    screen: AddDeck,
+    navigationOptions: {
+      tabBarLabel: 'Add',
+      tabBarIcon: ({ tintColor }) => <FontAwesome name='plus-square' size={30} color={tintColor} />
+    }
+  },
+// }, {
+//   navigationOptions: {
+//     header: null
+//   },
+//   tabBarOptions: {
+//     activeTintColor: purple,
+//     style: {
+//       height: 56,
+//       backgroundColor: white,
+//       shadowColor: 'rgba(0, 0, 0, 0.24)',
+//       shadowOffset: {
+//         width: 0,
+//         height: 3
+//       },
+//       shadowRadius: 6,
+//       shadowOpacity: 1
+//     }
+//   }
+})
+
+const MainNavigator = createStackNavigator({
+  Home: {
+    screen: Tabs,
+    navigationOptions: {
+      header: null,
+      title: 'Home',
+    }
+  },
+  ShowDeck: {
+    screen: ShowDeck,
+    navigationOptions: {
+      header: null,
+      title: 'Deck',
+    }
+  }
+})
 
 function UdaciStatusBar ({backgroundColor, ...props}) {
   return (
@@ -24,7 +78,7 @@ export default class App extends React.Component {
       <Provider store={createStore(reducer)}>
         <View style={styles.container}>
           <UdaciStatusBar backgroundColor={purple} barStyle="light-content" />
-          <ListDeck />
+          <MainNavigator />
         </View>
       </Provider>
     );

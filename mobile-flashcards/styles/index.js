@@ -13,26 +13,34 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: white,
-    alignItems: 'center',
+  },
+  row: {
+    flexDirection: 'row',
+    flex: 1,
     justifyContent: 'center',
+    marginLeft: 15,
+    marginRight: 15,
   },
   headingTitle: {
     fontSize: 30,
-    marginLeft: 15,
-    marginRight: 15,
-    marginBottom: 15,
+
     alignItems: 'center',
     justifyContent: 'center',
   },
   input: {
     height: 40,
     fontSize: 20,
-    marginLeft: 15,
-    marginRight: 15,
-    marginBottom: 15,
-    alignSelf: 'stretch',
   },
-  noDeck:{
+  deck: {
+    height: 100,
+    width: 200,
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignSelf: 'stretch',
+    borderBottomWidth: 1,
+    borderColor: orange,
+  },
+  deckNone:{
     marginTop:50,
     marginBottom:50,
     alignItems: 'center',
@@ -46,14 +54,6 @@ const styles = StyleSheet.create({
   cards:{
     color: blue
   },
-  deck: {
-    height: 100,
-    alignItems: 'center',
-    justifyContent: 'center',
-    alignSelf: 'stretch',
-    borderBottomWidth: 1,
-    borderColor: orange,
-  }
 })
 
 export default styles

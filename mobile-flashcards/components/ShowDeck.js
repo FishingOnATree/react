@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Text, View, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 import TextButton from './TextButton'
+import styles from '../styles'
 
 class ShowDeck extends Component {
 
@@ -17,7 +18,7 @@ class ShowDeck extends Component {
           Add Quiz
         </TextButton>
         <TextButton
-          /*onPress={() => navigate('QuizView', { deck })}*/ >
+          /*onPress={() => navigate('ViewQuiz', { deck })}*/ >
           Start Quiz
         </TextButton>
       </View>
@@ -25,7 +26,7 @@ class ShowDeck extends Component {
   }
 }
 
-function mapStateToProps(deck) {
+function mapStateToProps(decks) {
   return {
     decks
   }

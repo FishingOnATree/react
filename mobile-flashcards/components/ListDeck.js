@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import { Text, View, ScrollView, TouchableOpacity } from 'react-native'
+import { Text, View, TouchableOpacity, ScrollView } from 'react-native'
 import { connect } from 'react-redux'
 import { loadDecks } from '../actions'
 import { getDecks } from '../utils/api'
+import ShowDeck from './ShowDeck'
 import styles from '../styles'
 
 class ListDeck extends Component {
@@ -15,26 +16,24 @@ class ListDeck extends Component {
 
   render() {
     const { decks } = this.props
-    //const navigate = this.props.navigation.navigate
-    //onPress={() => navigate('DeckDetail', { deckTitle: key })} >
-    console.log(decks);
     return (
-      <ScrollView>
-        <View style={styles.container}>
+      <View style={styles.row}>
+        <ScrollView>
           {Object.keys(decks).length>0 ?
-            Object.keys(decks).map((key) => (
+            Object.keys(decks).map((title) => (
             <TouchableOpacity
               style={styles.deck}
-              key={key} >
-              <Text style={styles.title}>{key}</Text>
-              <Text style={styles.cards}>{decks[key].questions.length} cards</Text>
+              key={title}
+              onPress={() => this.props.navigation.navigate('ShowDeck', { title })}>
+              <Text style={styles.title}>{title}</Text>
+              <Text style={styles.cards}>{decks[title].questions.length} cards</Text>
             </TouchableOpacity>
-          ))
-          :
-          <Text style={styles.noDeck}>No deck added!</Text>
-        }
-        </View>
-      </ScrollView>
+            ))
+            :
+            <Text style={styles.deckNone}>No deck available</Text>
+          }
+        </ScrollView>
+      </View>
     )
   }
 }

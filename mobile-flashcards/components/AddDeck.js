@@ -1,12 +1,5 @@
-
 import React, { Component } from 'react'
-import {
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-  KeyboardAvoidingView } from 'react-native'
-import { Platform } from 'react-native'
+import { Text, TextInput, View, KeyboardAvoidingView } from 'react-native'
 import { NavigationActions } from 'react-navigation'
 import { connect } from 'react-redux'
 import { addDeck } from '../actions'
