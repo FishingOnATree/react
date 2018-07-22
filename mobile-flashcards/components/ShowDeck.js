@@ -18,7 +18,7 @@ class ShowDeck extends Component {
           Add Quiz
         </TextButton>
         <TextButton
-          /*onPress={() => navigate('ViewQuiz', { deck })}*/ >
+          onPress={() => navigate('TakeQuiz', { deck })} >
           Start Quiz
         </TextButton>
       </View>

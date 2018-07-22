@@ -10,6 +10,7 @@ import AddCard from './components/AddCard'
 import AddDeck from './components/AddDeck'
 import ListDeck from './components/ListDeck'
 import ShowDeck from './components/ShowDeck'
+import TakeQuiz from './components/TakeQuiz'
 import styles, { purple, white, blue } from './styles'
 
 
@@ -66,6 +67,12 @@ const MainNavigator = createStackNavigator(
       screen: AddCard,
       navigationOptions: {
         title: 'Add Quiz'
+      }
+    },
+    TakeQuiz: {
+      screen: TakeQuiz,
+      navigationOptions: {
+        title: 'Take Quiz'
       }
     }
   }, {
