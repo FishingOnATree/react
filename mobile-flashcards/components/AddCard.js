@@ -35,29 +35,31 @@ class AddCard extends Component {
     const { title } = this.props.navigation.state.params.deck
 
     return (
-      <KeyboardAvoidingView behavior='padding' >
-        <Text style={styles.subtitle}>Question</Text>
-        <TextInput
-          ref='question_input'
-          multiline = {true}
-          style={ styles.input_ios }
-          placeholder="New Question"
-          value={this.state.question}
-          onChangeText={(question) => this.setState({question})}
-        />
-        <Text style={styles.subtitle}>Answer</Text>
-        <TextInput
-          multiline = {true}
-          style={ styles.input_ios }
-          placeholder="New Answer"
-          value={this.state.answer}
-          onChangeText={(answer) => this.setState({answer})}
-        />
-        { this.state.text === null ? '':<Text style={styles.warning}>{this.state.text}</Text>}
-        <TextButton onPress={this.submit}>
-          ADD
-        </TextButton>
-      </KeyboardAvoidingView>
+      <View style={styles.col}>
+        <KeyboardAvoidingView behavior='padding' >
+          <Text style={styles.subtitle}>Question</Text>
+          <TextInput
+            ref='question_input'
+            multiline = {true}
+            style={ styles.input }
+            placeholder="New Question"
+            value={this.state.question}
+            onChangeText={(question) => this.setState({question})}
+          />
+          <Text style={styles.subtitle}>Answer</Text>
+          <TextInput
+            multiline = {true}
+            style={ styles.input }
+            placeholder="New Answer"
+            value={this.state.answer}
+            onChangeText={(answer) => this.setState({answer})}
+          />
+          { this.state.text === null ? '':<Text style={styles.warning}>{this.state.text}</Text>}
+          <TextButton onPress={this.submit}>
+            ADD
+          </TextButton>
+        </KeyboardAvoidingView>
+      </View>
     )
   }
 }

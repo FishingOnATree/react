@@ -21,19 +21,18 @@ const styles = StyleSheet.create({
     marginLeft: 15,
     marginRight: 15,
   },
-  headingTitle: {
-    fontSize: 30,
-
-    alignItems: 'center',
+  col: {
+    flex: 1,
     justifyContent: 'center',
-  },
-  input: {
-    height: 40,
-    fontSize: 20,
+    alignItems: 'center',
+    paddingTop: 15,
+    paddingBottom: 15,
+    marginLeft: 15,
+    marginRight: 15,
   },
   deck: {
     height: 100,
-    width: 200,
+    width: 360,
     alignItems: 'center',
     justifyContent: 'center',
     alignSelf: 'stretch',
@@ -45,7 +44,6 @@ const styles = StyleSheet.create({
     marginBottom:50,
     alignItems: 'center',
     justifyContent: 'center',
-    color: gray,
     fontSize:20,
   },
   title: {
@@ -61,7 +59,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginBottom: 5,
   },
-  input_ios: {
+  input: {
     height: 60,
     width: 300,
     fontSize: 18,

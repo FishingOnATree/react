@@ -33,18 +33,20 @@ class AddDeck extends Component {
   render() {
     return (
       <KeyboardAvoidingView behavior='padding' style={styles.container}>
-        <Text style={styles.headingTitle}>Title of new deck</Text>
-        <TextInput
-          ref='text_input'
-          style={ styles.input }
-          placeholder="Deck Title"
-          value={this.state.title}
-          onChangeText={(title) => this.setState(this.makeState(title, ''))}
-        />
-        <Text style={style.warning}>{this.state.warning}</Text>
-        <TextButton onPress={() => this.submit()}>
-          Submit
-        </TextButton>
+        <View style={styles.col}>
+          <Text style={styles.title}>Title of new deck</Text>
+
+          <TextInput
+            style={ styles.input }
+            placeholder="Deck Title"
+            value={this.state.title}
+            onChangeText={(title) => this.setState(this.makeState(title, ''))}
+          />
+          <Text style={styles.warning}>{this.state.warning}</Text>
+          <TextButton onPress={() => this.submit()}>
+            Submit
+          </TextButton>
+        </View>
       </KeyboardAvoidingView>
     )
   }
