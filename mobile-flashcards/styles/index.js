@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     color: blue
   },
   subtitle: {
-    fontSize: 18,
+    fontSize: 16,
     marginBottom: 5,
   },
   input: {

@@ -7,38 +7,39 @@ import styles from '../styles'
 
 
 class TakeQuiz extends Component {
-  state =  {
-    index: 0,
-    correctCounter: 0,
-    answer: '',
-  }
-
-  answerQuestion = () => {
-    this.setState({index : this.state.correctAnswers + 1, questionCounter: this.state.questionCounter + 1})
-  }
-
-  initialState = () => {
+  static getDefaultState() {
     return {
       index: 0,
       correctCounter: 0,
-      answer: '',
+      showCurrentAnswer: false,
     }
   }
 
+  constructor(props) {
+    super(props);
+    this.state = TakeQuiz.getDefaultState()
+  }
 
+  answerQuestion = (correctAnswer) => {
+    this.setState({
+      index: this.state.index + 1,
+      correctCounter : this.state.correctCounter + (correctAnswer ? 1 : 0),
+      showCurrentAnswer: false,
+    })
+  }
 
   render() {
-    const { index } = this.state
-    console.log('params: ' + this.props.navigation.state.params)
+    const { index, showCurrentAnswer } = this.state
+    console.log('index: ' + index)
     const { deck } = this.props.navigation.state.params
     const questions = deck.questions
     if (index === questions.length ) {
       const { correctCounter } = this.state
       return (
-        <View style={styles.container}>
-            <Text style={styles.text}> Quiz Result </Text>
-            <Text style={styles.textGreen}> Score : {correctAnswers}/{questions.length} </Text>
-            <TextButton onPress={() => this.setState(this.initialState())}>
+        <View style={styles.col}>
+            <Text style={styles.title}> Quiz Result </Text>
+            <Text style={styles.subtitle}> Score : {correctCounter}/{questions.length} </Text>
+            <TextButton onPress={() => this.setState(TakeQuiz.getDefaultState())}>
               Restart
             </TextButton>
             <TextButton
@@ -51,16 +52,20 @@ class TakeQuiz extends Component {
       const navigate = this.props.navigation.navigate
       const question = questions[index]
       return (
-        <View>
-          <View style={styles.row}>
-            <Text> Question {index + 1} of {questions.length} </Text>
-          </View>
-          <View style={styles.row}>
-            <Text style={styles.title}>{question.question}</Text>
-            <Text>
-              {question.answer}
-            </Text>
-          </View>
+        <View style={styles.col}>
+          <Text style={styles.title}> Question {index + 1} of {questions.length} </Text>
+          <Text style={styles.subtitle}>{question.question}</Text>
+          <Text style={styles.title}> Answer: </Text>
+          {showCurrentAnswer ?
+            <Text style={styles.subtitle}>{question.answer}</Text>
+            :
+            <TextButton onPress={() => this.setState({...this.state, showCurrentAnswer:true})}>
+              Show Answer
+            </TextButton>
+          }
+          {showCurrentAnswer ? <TextButton onPress={() => this.answerQuestion(true)}>Correct</TextButton> : ""}
+          {showCurrentAnswer ? <TextButton onPress={() => this.answerQuestion(false)}>Inorrect</TextButton> : ""}
+
         </View>
       )
     }
