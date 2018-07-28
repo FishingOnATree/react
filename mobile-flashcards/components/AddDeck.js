@@ -20,10 +20,11 @@ class AddDeck extends Component {
   submit() {
     let { title } = this.state
     title = title.trim().toUpperCase()
+    const {navigation} = this.props
     if (title) {
       saveDeckTitle(title).then(() => {
-        this.setState(this.makeState('', 'Title saved'))
         this.props.dispatch(addDeck(title))
+        navigation.navigate('ShowDeck', { title })
       })
     } else {
       this.setState(this.makeState('', 'Invalid title'))
@@ -52,9 +53,10 @@ class AddDeck extends Component {
   }
 }
 
-function mapStateToProps({dispatch}) {
+function mapStateToProps(decks, {dispatch, navigation}) {
   return {
-    dispatch
+    dispatch,
+    navigation
   }
 }
 
