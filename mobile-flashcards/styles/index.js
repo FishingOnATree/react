@@ -30,6 +30,21 @@ const styles = StyleSheet.create({
     marginLeft: 15,
     marginRight: 15,
   },
+  box: {
+    width: 350,
+    height: 100,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingBottom: 0,
+    marginBottom: 50,
+  },
+  smallbox: {
+    width: 350,
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 20,
+  },
   deck: {
     height: 100,
     width: 360,
@@ -57,7 +72,10 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     fontSize: 16,
-    marginBottom: 5,
+  },
+  answer: {
+    fontSize: 16,
+    color: orange,
   },
   input: {
     height: 60,

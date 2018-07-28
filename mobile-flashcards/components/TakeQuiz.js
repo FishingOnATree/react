@@ -30,22 +30,27 @@ class TakeQuiz extends Component {
 
   render() {
     const { index, showCurrentAnswer } = this.state
-    console.log('index: ' + index)
     const { deck } = this.props.navigation.state.params
     const questions = deck.questions
     if (index === questions.length ) {
       const { correctCounter } = this.state
       return (
         <View style={styles.col}>
+          <View style={styles.smallbox}>
             <Text style={styles.title}> Quiz Result </Text>
             <Text style={styles.subtitle}> Score : {correctCounter}/{questions.length} </Text>
+          </View>
+          <View style={styles.smallbox}>
             <TextButton onPress={() => this.setState(TakeQuiz.getDefaultState())}>
-              Restart
+              Restart quiz
             </TextButton>
+          </View>
+          <View style={styles.smallbox}>
             <TextButton
               onPress={() => this.props.navigation.dispatch(NavigationActions.back())}>
-              Back
+              Back to deck
             </TextButton>
+          </View>
         </View>
       )
     } else {
@@ -53,19 +58,32 @@ class TakeQuiz extends Component {
       const question = questions[index]
       return (
         <View style={styles.col}>
-          <Text style={styles.title}> Question {index + 1} of {questions.length} </Text>
-          <Text style={styles.subtitle}>{question.question}</Text>
-          <Text style={styles.title}> Answer: </Text>
+          <View style={styles.smallbox}>
+            <Text style={styles.title}> Question {index + 1} of {questions.length} </Text>
+          </View>
+          <View style={styles.smallbox}>
+            <Text style={styles.subtitle}>{question.question}</Text>
+          </View>
+          <View style={styles.smallbox}>
+            <Text style={styles.title}> Answer: </Text>
+          </View>
+          <View style={styles.smallbox}>
+            {showCurrentAnswer ?
+              <Text style={styles.answer}>{question.answer}</Text>
+              :
+              <TextButton onPress={() => this.setState({...this.state, showCurrentAnswer:true})}>
+                Show Answer
+              </TextButton>
+            }
+          </View>
           {showCurrentAnswer ?
-            <Text style={styles.subtitle}>{question.answer}</Text>
-            :
-            <TextButton onPress={() => this.setState({...this.state, showCurrentAnswer:true})}>
-              Show Answer
-            </TextButton>
-          }
-          {showCurrentAnswer ? <TextButton onPress={() => this.answerQuestion(true)}>Correct</TextButton> : ""}
-          {showCurrentAnswer ? <TextButton onPress={() => this.answerQuestion(false)}>Inorrect</TextButton> : ""}
-
+            <View style={styles.smallbox}>
+              <TextButton onPress={() => this.answerQuestion(true)}>Correct</TextButton>
+            </View> : ""}
+          {showCurrentAnswer ?
+            <View style={styles.smallbox}>
+              <TextButton onPress={() => this.answerQuestion(false)}>Inorrect</TextButton>
+            </View> : ""}
         </View>
       )
     }
