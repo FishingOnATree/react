@@ -12,7 +12,7 @@ import ListDeck from './components/ListDeck'
 import ShowDeck from './components/ShowDeck'
 import TakeQuiz from './components/TakeQuiz'
 import styles, { purple, white, blue } from './styles'
-
+import { setLocalNotification } from './utils/notification'
 
 const Tabs = createBottomTabNavigator( {
   ListDeck: {
@@ -101,6 +101,10 @@ function UdaciStatusBar ({backgroundColor, ...props}) {
 }
 
 export default class App extends React.Component {
+  componentDidMount() {
+    setLocalNotification()
+  }
+    
   render() {
     return (
       <Provider store={createStore(reducer)}>

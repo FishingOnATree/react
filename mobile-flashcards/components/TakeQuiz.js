@@ -4,7 +4,7 @@ import { NavigationActions } from 'react-navigation'
 import FlipCard from 'react-native-flip-card'
 import TextButton from './TextButton'
 import styles from '../styles'
-
+import { clearLocalNotification, setLocalNotification } from '../utils/notification'
 
 class TakeQuiz extends Component {
   static getDefaultState() {
@@ -34,6 +34,7 @@ class TakeQuiz extends Component {
     const questions = deck.questions
     if (index === questions.length ) {
       const { correctCounter } = this.state
+      clearLocalNotification().then(setLocalNotification)
       return (
         <View style={styles.col}>
           <View style={styles.smallbox}>
