@@ -1,23 +1,118 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Text, View, StatusBar } from 'react-native';
+import { Constants } from 'expo'
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
+import reducer from './reducers'
+import { createBottomTabNavigator, createStackNavigator } from 'react-navigation'
+import { FontAwesome, Ionicons } from '@expo/vector-icons'
+import AddCard from './components/AddCard'
+import AddDeck from './components/AddDeck'
+import ListDeck from './components/ListDeck'
+import ShowDeck from './components/ShowDeck'
+import TakeQuiz from './components/TakeQuiz'
+import styles, { purple, white, blue } from './styles'
+import { setLocalNotification } from './utils/notification'
+
+const Tabs = createBottomTabNavigator( {
+  ListDeck: {
+    screen: ListDeck,
+    navigationOptions: {
+      tabBarLabel: 'List',
+      tabBarIcon: ({ tintColor }) => <Ionicons name='ios-bookmarks' size={30} color={tintColor} />
+    }
+  },
+  AddDeck: {
+    screen: AddDeck,
+    navigationOptions: {
+      tabBarLabel: 'Add',
+      tabBarIcon: ({ tintColor }) => <FontAwesome name='plus-square' size={30} color={tintColor} />
+    }
+  },
+}, {
+  navigationOptions: {
+    header: null
+  },
+  tabBarOptions: {
+    activeTintColor: purple,
+    style: {
+      height: 56,
+      backgroundColor: white,
+      shadowColor: 'rgba(0, 0, 0, 0.24)',
+      shadowOffset: {
+        width: 0,
+        height: 3
+      },
+      shadowRadius: 6,
+      shadowOpacity: 1
+    }
+  }
+})
+
+const MainNavigator = createStackNavigator(
+  {
+    Home: {
+      screen: Tabs,
+      navigationOptions: {
+        title: 'Home',
+      }
+    },
+    ShowDeck: {
+      screen: ShowDeck,
+      navigationOptions: {
+        title: 'Deck View'
+      }
+    },
+    AddCard: {
+      screen: AddCard,
+      navigationOptions: {
+        title: 'Add Quiz'
+      }
+    },
+    TakeQuiz: {
+      screen: TakeQuiz,
+      navigationOptions: {
+        title: 'Take Quiz'
+      }
+    }
+  }, {
+    navigationOptions: {
+      headerStyle: {
+        height: 20,
+        backgroundColor: blue,
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+        fontSize: 20,
+        justifyContent: 'space-between',
+        textAlign: 'center',
+      },
+    }
+  }
+)
+
+function UdaciStatusBar ({backgroundColor, ...props}) {
+  return (
+    <View style={{backgroundColor, height: Constants.statusBarHeight}} >
+      <StatusBar translucent backgroundColor={backgroundColor} {...props} />
+    </View>
+  )
+}
 
 export default class App extends React.Component {
+  componentDidMount() {
+    setLocalNotification()
+  }
+    
   render() {
     return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
-      </View>
+      <Provider store={createStore(reducer)}>
+        <View style={styles.container}>
+          <UdaciStatusBar backgroundColor={purple} barStyle="light-content" />
+          <MainNavigator />
+        </View>
+      </Provider>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
