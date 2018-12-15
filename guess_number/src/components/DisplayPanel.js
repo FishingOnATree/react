@@ -15,7 +15,8 @@ class DisplayPanel extends Component {
           </tr>
         </thead>
         <tbody>
-          { guesses? guesses.map((guess_attmpt) => {
+          { guesses ? guesses.map((guess_attmpt) => {
+              console.log(guess_attmpt);
               const {guess, result} = guess_attmpt;
               return (
                 <tr>
@@ -32,9 +33,9 @@ class DisplayPanel extends Component {
   }
 }
 
-function mapStateToProps ({ guesses, dispatch }) {
+function mapStateToProps ({ guess_number, dispatch }) {
   return {
-    guesses, dispatch
+    ...guess_number, dispatch
   }
 }
 
