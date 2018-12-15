@@ -11,10 +11,9 @@ function guess_number (state = {}, action) {
       }
     case GUESS_NUMBER :
       let { guesses } = state;
-      guesses.push(action.guess);
       return {
         ...state,
-        guesses,
+        guesses: guesses.concat(action.guess),
       }
     case GOT_IT :
       return {
