@@ -1,18 +1,30 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import './App.css';
+import ControlPanel from './ControlPanel';
+import DisplayPanel from './DisplayPanel';
+import { startGame } from '../actions';
 
 class App extends Component {
+  componentDidMount() {
+    this.props.dispatch(startGame())
+  }
+  
   render() {
     return (
       <div className="App">
-        <header className="App-header">
+        <div className="App-header">
           <h1>Guess Number</h1>
-          <div>control panel</div>
-          <div>display panel</div>
-        </header>
+        </div>
+        <ControlPanel />
+        <DisplayPanel />
       </div>
     );
   }
 }
-
-export default App;
+function mapStateToProps ({ dispatch }) {
+  return {
+    dispatch
+  }
+}
+export default connect(mapStateToProps)(App)
