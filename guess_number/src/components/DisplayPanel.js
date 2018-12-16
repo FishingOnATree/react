@@ -15,12 +15,11 @@ class DisplayPanel extends Component {
           </tr>
         </thead>
         <tbody>
-          { guesses ? guesses.map((guess_attmpt) => {
-              console.log(guess_attmpt);
+          { guesses ? guesses.map((guess_attmpt, index, list) => {
               const {guess, result} = guess_attmpt;
               return (
-                <tr>
-                  <td>x</td>
+                <tr key={list.length - index}>
+                  <td>{list.length - index}</td>
                   <td>{guess}</td>
                   <td>{result}</td>
                 </tr>

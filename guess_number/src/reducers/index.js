@@ -6,7 +6,7 @@ function guess_number (state = {}, action) {
     case START_GAME :
       return {
         answer: action.answer,
-        guesses: Array(),
+        guesses: [],
         gotit: false,
       }
     case GUESS_NUMBER :
