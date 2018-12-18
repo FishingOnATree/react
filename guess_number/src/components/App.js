@@ -8,7 +8,7 @@ import { generate_answer } from '../utils';
 
 class App extends Component {
   componentDidMount() {
-    this.props.dispatch(startGame(generate_answer()))
+    this.props.dispatch(startGame(generate_answer(4)))
   }
 
   render() {

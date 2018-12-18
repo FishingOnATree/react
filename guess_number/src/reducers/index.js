@@ -13,7 +13,7 @@ function guess_number (state = {}, action) {
       let { guesses } = state;
       return {
         ...state,
-        guesses: guesses.concat(action.guess),
+        guesses: [action.guess].concat(guesses),
       }
     case GOT_IT :
       return {
