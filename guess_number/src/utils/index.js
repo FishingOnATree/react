@@ -22,5 +22,9 @@ export function check_guess(answer, newGuess) {
     }
   }
   let intersection = new Set([...ansSet].filter(x => guessSet.has(x)));
-  return { guess: newGuess, result: (correctPos + "A" + intersection.size + "B") }
+  return {
+    guess: newGuess,
+    result: (correctPos + "A" + intersection.size + "B"),
+    gotit: correctPos === answer.length,
+  }
 }

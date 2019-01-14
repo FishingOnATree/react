@@ -20,8 +20,13 @@ class ControlPanel extends Component {
   }
   guess = (e) => {
     let value = this.state.newGuess
-    this.props.dispatch(guessNumber(check_guess(this.props.answer,value)))
+    let result = check_guess(this.props.answer,value)
     this.updateGuess('')
+    if (result['goit']) {
+      console.log("you win");
+    } else {
+      this.props.dispatch(guessNumber(result));
+    }
   }
   render() {
     return (
