@@ -11,14 +11,11 @@ function guess_number (state = {}, action) {
       }
     case GUESS_NUMBER :
       let { guesses } = state;
+      let { gotit } = action.guess;
       return {
         ...state,
         guesses: [action.guess].concat(guesses),
-      }
-    case GOT_IT :
-      return {
-        ...state,
-        gotit: true
+        gotit
       }
     default :
       return state
